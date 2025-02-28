@@ -12,7 +12,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.login-container{
+.container{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,4 +26,10 @@
   box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.705);
   padding: 30px;
   text-align: center;
+}
+
+input{
+  width: 15vw;
+  height: 3vh;
+  margin: 10px;
 }
