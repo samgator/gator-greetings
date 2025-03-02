@@ -4,6 +4,7 @@ import records from "./routes/record.js";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
+const mongoose = require('mongoose')
 
 app.use(cors());
 app.use(express.json());
