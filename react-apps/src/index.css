@@ -3,8 +3,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: rgba(51, 51, 51, 0.733);
-  background-color: #1d1f31;
+  color: hsla(0, 0%, 20%, 0.733);
+  background-color: hsl(234, 26%, 15%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,6 +17,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-width: 50vw;
 }
 
 .login{
@@ -24,12 +25,33 @@
   border: 1px solid rgb(71, 71, 71);
   border-radius: 10px;
   box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.705);
-  padding: 30px;
+  padding: 5vw;
   text-align: center;
 }
 
 input{
-  width: 15vw;
+  width: 20vw;
   height: 3vh;
   margin: 10px;
+}
+
+.loginBTN{
+  background-color: hsl(0, 0%, 93%);
+  border-width: 2px;
+  border-color: hsl(234, 26%, 15%);
+  font-size: 20px;
+  padding: 8px;
+  margin: 10px;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+}
+
+.loginBTN:hover{
+  background-color: hsl(234, 26%, 15%);
+  color: white;
+}
+
+.loginBTN:active{
+  background-color: hsl(236, 12%, 25%);
+  transition-duration: 0s;
 }
