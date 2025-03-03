@@ -1,4 +1,9 @@
-# React + Vite
+# HOW TO START THE APPLICATION
+1. Open a terminal
+2. Change directory to react-apps
+3. Type the command "npm run dev"
+
+# React + Vite Documentation
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
