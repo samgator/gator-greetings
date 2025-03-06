@@ -63,12 +63,12 @@ button {
   cursor: pointer;
 }
 
-.login-btn {
+.blue-btn {
   background-color: #0021A5;
   color: white;
 }
 
-.signup-btn {
+.orange-btn {
   background-color: #FA4616;
   color: white;
 }
