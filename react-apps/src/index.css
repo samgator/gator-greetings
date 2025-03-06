@@ -7,13 +7,14 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: var(--dark-text);
 }
 
-.login {
+.card {
   background-color: var(--light-bg);
   border-radius: 12px;
   padding: 40px;
@@ -91,4 +92,13 @@ button:hover {
   background: linear-gradient(270deg, #0021A5, #FA4616);
   background-size: 450% 450%;
   animation: gradientAnimation 10s ease infinite;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 20vw;
+  padding: 2.5vw;
 }

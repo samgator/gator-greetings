@@ -12,7 +12,7 @@ function Login() {
     if(page == "login"){
         return (
             <div className="container">
-                <div className="login">
+                <div className="card">
                     <img src="https://placehold.co/200" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Welcome to GatorGreetings</h1>
                     <h2 className="subtitle">Please log in or sign up below</h2>
@@ -31,7 +31,7 @@ function Login() {
     else if(page == "signup"){
         return (
             <div className="container">
-                <div className="login">
+                <div className="card">
                     <img src="https://placehold.co/200" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Create Your<br/>GatorGreetings Account</h1>
                     <div>
