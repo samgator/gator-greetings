@@ -1,3 +1,3 @@
-**To Ping MongoDB:**
-npm install express mongoose bcryptjs jsonwebtoken dotenv cors cookie-parsercd server
+**To Run Backend:**
+npm install express mongoose passport passport-google-oauth20 jsonwebtoken dotenv cookie-parser cors
 node --env-file=config.env server
