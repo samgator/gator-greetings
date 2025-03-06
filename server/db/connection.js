@@ -1,4 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const uri = process.env.ATLAS_URI || "";
 const client = new MongoClient(uri, {
@@ -9,16 +12,19 @@ const client = new MongoClient(uri, {
   },
 });
 
-try {
-  await client.connect();
-  await client.db("admin").command({ ping: 1 });
-  console.log(
-   "Pinged your deployment. You successfully connected to MongoDB!"
-  );
-} catch(err) {
-  console.error(err);
-}
+let db;
 
-let db = client.db("gator-greetings");
+const connectDB = async () => {
+  try {
+    await client.connect();
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
-export default db;
+    db = client.db("gator-greetings");
+  } catch(err) {
+    console.error("Error Connecting to MongoDB");
+    process.exit(1);
+  }
+};
+
+export { connectDB, db };

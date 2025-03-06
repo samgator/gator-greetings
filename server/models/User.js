@@ -7,4 +7,4 @@ const userSchema = new mongoose.Schema({
     profilePicture: { type: String }
 });
 
-module.exports = mongoose.model("User", userSchema);
+export default userSchema;
