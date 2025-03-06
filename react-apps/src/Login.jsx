@@ -13,7 +13,7 @@ function Login() {
         return (
             <div className="container">
                 <div className="card">
-                    <img src="https://placehold.co/200" alt="GatorGreetings Logo" className="logo"/> 
+                    <img src="/src/assets/logo.png" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Welcome to GatorGreetings</h1>
                     <h2 className="subtitle">Please log in or sign up below</h2>
                     <div>
@@ -32,7 +32,7 @@ function Login() {
         return (
             <div className="container">
                 <div className="card">
-                    <img src="https://placehold.co/200" alt="GatorGreetings Logo" className="logo"/> 
+                    <img src="/src/assets/logo.png" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Create Your<br/>GatorGreetings Account</h1>
                     <div>
                         <input type="text" placeholder="Username" className="input-field"/>
