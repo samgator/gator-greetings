@@ -1,0 +1,22 @@
+import './Profile.css'
+function Profile({username, bio}) {
+    return ( 
+        <div className="container">
+            <div className='exit-btn-container'>
+                <button className='exit-btn'>X</button>
+            </div>
+            <div className="card" style={{display: "flex", width: "50vw"}}>
+                <div className="column">
+                <img src="https://placehold.co/300" className="profilePic"/>    
+                </div>
+                <div className="column">
+                    <h1 className="title">{username}'s Profile</h1> 
+                    <h2 className="bio-title">Bio:</h2>
+                    <div className="bio">{bio}</div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Profile;
