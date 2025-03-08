@@ -21,6 +21,37 @@ app.use(passport.initialize());
 
 app.use("/record", records);
 app.use("/api/auth", authRoutes);
+
+
+app.post("/register", async (req, res) => {
+  try {
+    const { username, email, password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+      return res.status(400).json({ message: "Passwords do not match" });
+    }
+
+    // user existence
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    // use bcrypt to hash passwords for security
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // save to database
+    user = new User({ username, email, password: hashedPassword });
+    await user.save();
+
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
+
 const PORT = process.env.PORT || 5050;
 
 // start the Express server
