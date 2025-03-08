@@ -24,6 +24,9 @@ function Login() {
                     </div>
                     <button className="blue-btn">Log In</button>
                     <button className="orange-btn" onClick={loadSignUp}>Sign Up</button>
+                    <button><img src="/src/assets/google.png" height={30} width={30}></img> 
+                    Sign in with Google
+                    </button>
                 </div>
             </div>
         );
