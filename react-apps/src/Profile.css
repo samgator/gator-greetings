@@ -1,0 +1,33 @@
+.profilePic{
+    height: 300px;
+    width: 300px;
+}
+
+.bio-title{
+    text-align: left;
+    width: 100%;
+    color: #FA4616;
+    font-size: 18px;
+}
+
+.bio{
+    text-align: left;
+    width: 100%;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 5px;
+    min-height: 10vh;
+}
+
+.exit-btn-container{
+    margin-left: 57vw;
+}
+
+.exit-btn{
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -1,35 +1,104 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --light-bg: rgba(255, 255, 255, 0.9);
+  --dark-text: #1d1f31;
+  font-family: 'Arial', sans-serif;
   line-height: 1.5;
-  font-weight: 400;
-
-  color: rgba(51, 51, 51, 0.733);
-  background-color: #1d1f31;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-.container{
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--dark-text);
+}
+
+.card {
+  background-color: var(--light-bg);
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  width: 320px;
+}
+
+.logo {
+  width: 200px;
+  margin-bottom: 15px;
+}
+
+.title {
+  color: #0021A5;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: #FA4616;
+  font-size: 18px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #0021A5;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #FA4616;
+  box-shadow: 0 0 8px #FA4616;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.blue-btn {
+  background-color: #0021A5;
+  color: white;
+}
+
+.orange-btn {
+  background-color: #FA4616;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background: linear-gradient(270deg, #0021A5, #FA4616);
+  background-size: 450% 450%;
+  animation: gradientAnimation 10s ease infinite;
 }
 
-.login{
-  background-color: rgba(255, 255, 255, 0.781);
-  border: 1px solid rgb(71, 71, 71);
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.705);
-  padding: 30px;
-  text-align: center;
-}
-
-input{
-  width: 15vw;
-  height: 3vh;
-  margin: 10px;
+.column{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 20vw;
+  padding: 2.5vw;
 }
