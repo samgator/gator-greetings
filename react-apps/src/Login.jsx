@@ -1,21 +1,39 @@
 import {useState} from "react";
 function Login() {
     //useStates determine loaded page (login/signup)
-    const [page, setPage] = useState("login")
+    const [page, setPage] = useState("login");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+
     function loadLogin(){
-        setPage(prevPage => "login")
+        setPage(prevPage => "login");
     }
     function loadSignUp(){
-        setPage(prevPage => "signup")
+        setPage(prevPage => "signup");
     }
 
-    /*
-    function addUser() {
-        use this when we hit the button createAccount
+    // function to use register route upon user signup
+    async function addUser() {
+        const response = await fetch("http://localhost:5050/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password })
+        });
+        const data = await response.json();
+        console.log(data);
     }
 
-    */
-
+    // function to use login route upon user signup
+    async function handleLogin() {
+        const response = await fetch("http://localhost:5050/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+        const data = await response.json();
+        console.log(data);
+    }
 
     if(page == "login"){
         return (
@@ -30,7 +48,7 @@ function Login() {
                     <div>
                         <input type="password" placeholder="Password" className="input-field"/>
                     </div>
-                    <button className="blue-btn">Log In</button>
+                    <button className="blue-btn" onClick={handleLogin}>Log In</button>
                     <button className="orange-btn" onClick={loadSignUp}>Sign Up</button>
                     <button><img src="/src/assets/google.png" height={30} width={30}></img> 
                     Sign in with Google
@@ -57,7 +75,7 @@ function Login() {
                     <div>
                         <input type="password" placeholder="Confirm Password" className="input-field"/>
                     </div>
-                    <button className="blue-btn">Create Account</button>
+                    <button className="blue-btn" onClick={addUser}>Create Account</button>
                     <button className="orange-btn" onClick={loadLogin}>Back to Login</button>
                 </div>
             </div>
