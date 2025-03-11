@@ -9,6 +9,14 @@ function Login() {
         setPage(prevPage => "signup")
     }
 
+    /*
+    function addUser() {
+        use this when we hit the button createAccount
+    }
+
+    */
+
+
     if(page == "login"){
         return (
             <div className="container">
