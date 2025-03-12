@@ -4,7 +4,7 @@ function Login() {
     const [page, setPage] = useState("login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const password_confirm = "";
+    const [password_confirm, setPassword_Confirm] = useState("");
     const [username, setUsername] = useState("");
 
     function loadLogin(){
@@ -13,6 +13,22 @@ function Login() {
     function loadSignUp(){
         setPage(prevPage => "signup");
     }
+
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
+    };
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    const handlePassword_ConfirmChange = (e) => {
+        setPassword_Confirm(e.target.value);
+    };
 
     // function to use register route upon user signup
     async function addUser() {
@@ -44,10 +60,10 @@ function Login() {
                     <h1 className="title">Welcome to GatorGreetings</h1>
                     <h2 className="subtitle">Please log in or sign up below</h2>
                     <div>
-                        <input type="email" value={email} placeholder="Email address" className="input-field"/>
+                        <input type="email" value={email} placeholder="Email address" className="input-field" onChange={handleEmailChange}/>
                     </div>
                     <div>
-                        <input type="password" value={password} placeholder="Password" className="input-field"/>
+                        <input type="password" value={password} placeholder="Password" className="input-field" onChange={handlePasswordChange}/>
                     </div>
                     <button className="blue-btn" onClick={handleLogin}>Log In</button>
                     <button className="orange-btn" onClick={loadSignUp}>Sign Up</button>
@@ -66,16 +82,16 @@ function Login() {
                     <img src="/src/assets/logo.png" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Create Your<br/>GatorGreetings Account</h1>
                     <div>
-                        <input type="text" value={username} placeholder="Username" className="input-field"/>
+                        <input type="text" value={username} placeholder="Username" className="input-field" onChange={handleUsernameChange}/>
                     </div>
                     <div>
-                        <input type="email" value={email} placeholder="Email address" className="input-field"/>
+                        <input type="email" value={email} placeholder="Email address" className="input-field" onChange={handleEmailChange}/>
                     </div>
                     <div>
-                        <input type="password" value={password} placeholder="Password" className="input-field"/>
+                        <input type="password" value={password} placeholder="Password" className="input-field" onChange={handlePasswordChange}/>
                     </div>
                     <div>
-                        <input type="password" value={password_confirm} placeholder="Confirm Password" className="input-field"/>
+                        <input type="password" value={password_confirm} placeholder="Confirm Password" className="input-field" onChange={handlePassword_ConfirmChange}/>
                     </div>
                     <button className="blue-btn" onClick={addUser}>Create Account</button>
                     <button className="orange-btn" onClick={loadLogin}>Back to Login</button>
