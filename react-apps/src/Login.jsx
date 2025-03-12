@@ -5,6 +5,7 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password_confirm, setPassword_Confirm] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const [username, setUsername] = useState("");
 
     function loadLogin(){
@@ -32,6 +33,12 @@ function Login() {
 
     // function to use register route upon user signup
     async function addUser() {
+        
+        if (password != password_confirm){
+            setPasswordError("Passwords do not match");
+            return;
+        }
+        setPasswordError("");
         const response = await fetch("http://localhost:5050/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -93,6 +100,7 @@ function Login() {
                     <div>
                         <input type="password" value={password_confirm} placeholder="Confirm Password" className="input-field" onChange={handlePassword_ConfirmChange}/>
                     </div>
+                    <div style = {{color:"red"}}>{passwordError}</div>
                     <button className="blue-btn" onClick={addUser}>Create Account</button>
                     <button className="orange-btn" onClick={loadLogin}>Back to Login</button>
                 </div>
