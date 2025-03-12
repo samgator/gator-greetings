@@ -4,6 +4,7 @@ function Login() {
     const [page, setPage] = useState("login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const password_confirm = "";
     const [username, setUsername] = useState("");
 
     function loadLogin(){
@@ -43,15 +44,16 @@ function Login() {
                     <h1 className="title">Welcome to GatorGreetings</h1>
                     <h2 className="subtitle">Please log in or sign up below</h2>
                     <div>
-                        <input type="email" placeholder="Email address" className="input-field"/>
+                        <input type="email" value={email} placeholder="Email address" className="input-field"/>
                     </div>
                     <div>
-                        <input type="password" placeholder="Password" className="input-field"/>
+                        <input type="password" value={password} placeholder="Password" className="input-field"/>
                     </div>
                     <button className="blue-btn" onClick={handleLogin}>Log In</button>
                     <button className="orange-btn" onClick={loadSignUp}>Sign Up</button>
-                    <button><img src="/src/assets/google.png" height={30} width={30}></img> 
-                    Sign in with Google
+                    <button className="google-signin">
+                        <img src="/src/assets/google.png" height={30} width={30}></img> 
+                        <div>Sign in with Google</div>
                     </button>
                 </div>
             </div>
@@ -64,16 +66,16 @@ function Login() {
                     <img src="/src/assets/logo.png" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Create Your<br/>GatorGreetings Account</h1>
                     <div>
-                        <input type="text" placeholder="Username" className="input-field"/>
+                        <input type="text" value={username} placeholder="Username" className="input-field"/>
                     </div>
                     <div>
-                        <input type="email" placeholder="Email address" className="input-field"/>
+                        <input type="email" value={email} placeholder="Email address" className="input-field"/>
                     </div>
                     <div>
-                        <input type="password" placeholder="Password" className="input-field"/>
+                        <input type="password" value={password} placeholder="Password" className="input-field"/>
                     </div>
                     <div>
-                        <input type="password" placeholder="Confirm Password" className="input-field"/>
+                        <input type="password" value={password_confirm} placeholder="Confirm Password" className="input-field"/>
                     </div>
                     <button className="blue-btn" onClick={addUser}>Create Account</button>
                     <button className="orange-btn" onClick={loadLogin}>Back to Login</button>

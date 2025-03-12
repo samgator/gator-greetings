@@ -102,3 +102,15 @@ button:hover {
   min-width: 20vw;
   padding: 2.5vw;
 }
+
+.google-signin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-style: solid;
+  border-top-color: hsl(0, 100%, 50%);
+  border-right-color: hsl(240, 100%, 60%);
+  border-bottom-color: hsl(120, 100%, 25%);
+  border-left-color: hsl(51, 86%, 51%);
+}
