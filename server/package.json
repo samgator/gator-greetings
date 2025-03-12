@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "**To Run Backend:**\r npm install express mongoose passport passport-google-oauth20 jsonwebtoken dotenv cookie-parser cors\r node --env-file=config.env server",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

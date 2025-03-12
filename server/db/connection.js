@@ -22,7 +22,7 @@ const connectDB = async () => {
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
-    db = client.db("gator-greetings");
+    db = client.db("gatorgreetings");
   } catch(err) {
     console.error("Error Connecting to MongoDB");
     process.exit(1);

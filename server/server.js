@@ -1,21 +1,22 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import passport from "passport";
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcrypt";
 import authRoutes from "./routes/authRoutes.js";
 import { connectDB, connectMongoose } from "./db/connection.js";
 import records from "./routes/record.js";
 import User from "./user.js";
 
 dotenv.config();
+connectDB();
 connectMongoose();
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true}));
+app.use(cors({ origin: "http://localhost:5173", credentials: true}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
@@ -25,12 +26,9 @@ app.use("/api/auth", authRoutes);
 
 
 app.post("/register", async (req, res) => {
+  console.log("Received data:", req.body); // Debugging log
   try {
-    const { username, email, password, confirmPassword } = req.body;
-
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
+    const { username, email, password } = req.body;
 
     // user existence
     let user = await User.findOne({ email });
@@ -41,7 +39,7 @@ app.post("/register", async (req, res) => {
     // use bcrypt to hash passwords for security
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-
+  
     // save to database
     user = new User({ username, email, password: hashedPassword });
     await user.save();
