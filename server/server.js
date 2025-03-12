@@ -8,6 +8,7 @@ import bcryptjs from "bcryptjs";
 import authRoutes from "./routes/authRoutes.js";
 import { connectDB } from "./db/connection.js";
 import records from "./routes/record.js";
+const User = require("./user")
 
 dotenv.config();
 connectDB();
