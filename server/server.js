@@ -6,12 +6,12 @@ import cors from "cors";
 import passport from "passport";
 import bcryptjs from "bcryptjs";
 import authRoutes from "./routes/authRoutes.js";
-import { connectDB } from "./db/connection.js";
+import { connectDB, connectMongoose } from "./db/connection.js";
 import records from "./routes/record.js";
-const User = require("./user")
+import User from "./user.js";
 
 dotenv.config();
-connectDB();
+connectMongoose();
 
 const app = express();
 

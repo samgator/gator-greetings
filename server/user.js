@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const GoogleUserSchema = new mongoose.Schema({
     googleId: { type: String, required: true, unique: true },
@@ -14,6 +14,6 @@ const UserSchema = new mongoose.Schema({
   }, { collection: "Authentication.user" });
 
 
-  module.exports = mongoose.model("User", UserSchema);
-  
+  const User = mongoose.model("User", UserSchema);
+  export default User;
   

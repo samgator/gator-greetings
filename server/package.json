@@ -19,7 +19,7 @@
     "express": "^4.21.2",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.14.0",
+    "mongodb": "^6.14.2",
     "mongoose": "^8.12.1",
     "npm": "^11.2.0",
     "passport": "^0.7.0",
