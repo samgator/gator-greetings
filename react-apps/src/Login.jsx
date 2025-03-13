@@ -69,10 +69,9 @@ function Login() {
         const data = await response.json();
 
         if (response.ok) {
-            setMessage("Login successful!");
             setToken(data.token);
             localStorage.setItem("token", data.token);
-            navigate('profile');
+            navigate('home');
         } else {
             setMessage(data.message || "Login Failed.");
         }

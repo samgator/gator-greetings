@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom'
 
 function Profile({username, bio}) {
     const navigate = useNavigate();
-    
+
     function exitProfile(){
-        navigate('/');
+        navigate(-1);
     }
     return ( 
         <div className="container">
