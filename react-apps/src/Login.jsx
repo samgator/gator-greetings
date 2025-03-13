@@ -12,9 +12,11 @@ function Login() {
 
     function loadLogin(){
         setPage(prevPage => "login");
+        setMessage(<>Create Your<br/>GatorGreetings Account</>);
     }
     function loadSignUp(){
         setPage(prevPage => "signup");
+        setMessage("Please log in or sign up below");
     }
 
     const handleUsernameChange = (e) => {
@@ -37,7 +39,7 @@ function Login() {
     async function addUser() {
 
         if (password != password_confirm){
-            setPasswordError("Passwords do not match");
+            setMessage("Passwords do not match");
             return;
         }
         setPasswordError("");
@@ -48,7 +50,12 @@ function Login() {
             body: JSON.stringify({ username, email, password })
         });
         const data = await response.json();
-        console.log(data);
+        
+        if (response.ok) {
+            setMessage("Account created successfully!");
+        } else {
+            setMessage(data.message || "Sign Up Failed.");
+        }
     }
 
     // function to use login route upon user signup
@@ -59,7 +66,14 @@ function Login() {
             body: JSON.stringify({ email, password })
         });
         const data = await response.json();
-        console.log(data);
+
+        if (response.ok) {
+            setMessage("Login successful!");
+            setToken(data.token);
+            localStorage.setItem("token", data.token);
+        } else {
+            setMessage(data.message || "Login Failed.");
+        }
     }
 
     if(page == "login"){
@@ -68,7 +82,7 @@ function Login() {
                 <div className="card">
                     <img src="/src/assets/logo.png" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Welcome to GatorGreetings</h1>
-                    <h2 className="subtitle">Please log in or sign up below</h2>
+                    <h2 className="subtitle">{message || "Please log in or sign up below"}</h2>
                     <div>
                         <input type="email" value={email} placeholder="Email address" className="input-field" onChange={handleEmailChange}/>
                     </div>
@@ -91,6 +105,7 @@ function Login() {
                 <div className="card">
                     <img src="/src/assets/logo.png" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Create Your<br/>GatorGreetings Account</h1>
+                    <h2 className="subtitle">{message || <>Create Your<br/>GatorGreetings Account</>}</h2>
                     <div>
                         <input type="text" value={username} placeholder="Username" className="input-field" onChange={handleUsernameChange}/>
                     </div>
