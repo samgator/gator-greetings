@@ -1,11 +1,12 @@
-import {useState} from "react";
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
+
 function Login() {
     //useStates determine loaded page (login/signup)
     const [page, setPage] = useState("login");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password_confirm, setPassword_Confirm] = useState("");
-    const [passwordError, setPasswordError] = useState("");
     const [username, setUsername] = useState("");
     const [message, setMessage] = useState("");
     const [token, setToken] = useState(null);
@@ -42,7 +43,6 @@ function Login() {
             setMessage("Passwords do not match");
             return;
         }
-        setPasswordError("");
        
         const response = await fetch("http://localhost:5050/register", {
             method: "POST",
@@ -59,6 +59,7 @@ function Login() {
     }
 
     // function to use login route upon user signup
+    const navigate = useNavigate();
     async function handleLogin() {
         const response = await fetch("http://localhost:5050/login", {
             method: "POST",
@@ -71,6 +72,7 @@ function Login() {
             setMessage("Login successful!");
             setToken(data.token);
             localStorage.setItem("token", data.token);
+            navigate('profile');
         } else {
             setMessage(data.message || "Login Failed.");
         }
@@ -118,7 +120,6 @@ function Login() {
                     <div>
                         <input type="password" value={password_confirm} placeholder="Confirm Password" className="input-field" onChange={handlePassword_ConfirmChange}/>
                     </div>
-                    <div style = {{color:"red"}}>{passwordError}</div>
                     <button className="blue-btn" onClick={addUser}>Create Account</button>
                     <button className="orange-btn" onClick={loadLogin}>Back to Login</button>
                 </div>

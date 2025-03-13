@@ -1,9 +1,16 @@
 import './Profile.css'
+import { useNavigate } from 'react-router-dom'
+
 function Profile({username, bio}) {
+    const navigate = useNavigate();
+    
+    function exitProfile(){
+        navigate('/');
+    }
     return ( 
         <div className="container">
             <div className='exit-btn-container'>
-                <button className='exit-btn'>X</button>
+                <button className='exit-btn' onClick={exitProfile}>X</button>
             </div>
             <div className="card" style={{display: "flex", width: "50vw"}}>
                 <div className="column">
