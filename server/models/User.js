@@ -1,10 +1,19 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-    googleId: { type: String, unique: true },
+const GoogleUserSchema = new mongoose.Schema({
+    googleId: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    profilePicture: { type: String }
-});
+  });
 
-export default userSchema;
+
+const UserSchema = new mongoose.Schema({
+    username: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+  }, { collection: "Authentication.user" });
+
+
+  const User = mongoose.model("User", UserSchema);
+  export default User;
+  
