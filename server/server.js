@@ -8,7 +8,8 @@ import bcrypt from "bcrypt";
 import authRoutes from "./routes/authRoutes.js";
 import { connectDB, connectMongoose } from "./db/connection.js";
 import records from "./routes/record.js";
-import User from "./user.js";
+import User from "./models/User.js";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 connectDB();
@@ -24,9 +25,10 @@ app.use(passport.initialize());
 app.use("/record", records);
 app.use("/api/auth", authRoutes);
 
+const JWT_SECRET = process.env.JWT_SECRET;
+
 
 app.post("/register", async (req, res) => {
-  console.log("Received data:", req.body); // Debugging log
   try {
     const { username, email, password } = req.body;
 
@@ -54,7 +56,7 @@ app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-
+    
     if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(401).json({ message: "Invalid email or password" });
     }

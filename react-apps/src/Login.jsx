@@ -7,12 +7,16 @@ function Login() {
     const [password_confirm, setPassword_Confirm] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [username, setUsername] = useState("");
+    const [message, setMessage] = useState("");
+    const [token, setToken] = useState(null);
 
     function loadLogin(){
         setPage(prevPage => "login");
+        setMessage(<>Create Your<br/>GatorGreetings Account</>);
     }
     function loadSignUp(){
         setPage(prevPage => "signup");
+        setMessage("Please log in or sign up below");
     }
 
     const handleUsernameChange = (e) => {
@@ -33,21 +37,25 @@ function Login() {
 
     // function to use register route upon user signup
     async function addUser() {
-        console.log("add user is running!");
 
         if (password != password_confirm){
-            setPasswordError("Passwords do not match");
+            setMessage("Passwords do not match");
             return;
         }
         setPasswordError("");
-        console.log("Sending:", { username, email, password });
+       
         const response = await fetch("http://localhost:5050/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, email, password })
         });
         const data = await response.json();
-        console.log(data);
+        
+        if (response.ok) {
+            setMessage("Account created successfully!");
+        } else {
+            setMessage(data.message || "Sign Up Failed.");
+        }
     }
 
     // function to use login route upon user signup
@@ -58,7 +66,14 @@ function Login() {
             body: JSON.stringify({ email, password })
         });
         const data = await response.json();
-        console.log(data);
+
+        if (response.ok) {
+            setMessage("Login successful!");
+            setToken(data.token);
+            localStorage.setItem("token", data.token);
+        } else {
+            setMessage(data.message || "Login Failed.");
+        }
     }
 
     if(page == "login"){
@@ -67,7 +82,7 @@ function Login() {
                 <div className="card">
                     <img src="/src/assets/logo.png" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Welcome to GatorGreetings</h1>
-                    <h2 className="subtitle">Please log in or sign up below</h2>
+                    <h2 className="subtitle">{message || "Please log in or sign up below"}</h2>
                     <div>
                         <input type="email" value={email} placeholder="Email address" className="input-field" onChange={handleEmailChange}/>
                     </div>
@@ -90,6 +105,7 @@ function Login() {
                 <div className="card">
                     <img src="/src/assets/logo.png" alt="GatorGreetings Logo" className="logo"/> 
                     <h1 className="title">Create Your<br/>GatorGreetings Account</h1>
+                    <h2 className="subtitle">{message || <>Create Your<br/>GatorGreetings Account</>}</h2>
                     <div>
                         <input type="text" value={username} placeholder="Username" className="input-field" onChange={handleUsernameChange}/>
                     </div>
