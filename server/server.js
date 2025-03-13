@@ -29,7 +29,6 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 
 app.post("/register", async (req, res) => {
-  console.log("Received data:", req.body); // Debugging log
   try {
     const { username, email, password } = req.body;
 
@@ -61,8 +60,7 @@ app.post("/login", async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(401).json({ message: "Invalid email or password" });
     }
-    
-    console.log("User ID:", user._id);
+
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
 
     res.json({ message: "Login successful", token });

@@ -7,6 +7,8 @@ function Login() {
     const [password_confirm, setPassword_Confirm] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [username, setUsername] = useState("");
+    const [message, setMessage] = useState("");
+    const [token, setToken] = useState(null);
 
     function loadLogin(){
         setPage(prevPage => "login");
@@ -33,14 +35,13 @@ function Login() {
 
     // function to use register route upon user signup
     async function addUser() {
-        console.log("add user is running!");
 
         if (password != password_confirm){
             setPasswordError("Passwords do not match");
             return;
         }
         setPasswordError("");
-        console.log("Sending:", { username, email, password });
+       
         const response = await fetch("http://localhost:5050/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
