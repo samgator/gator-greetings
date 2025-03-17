@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import Message from './Message.jsx'
+import MessagePreview from './MessagePreview.jsx'
 
 function Home() {
     const navigate = useNavigate();
@@ -7,10 +7,19 @@ function Home() {
     function navigateProfile(){
         navigate('profile');
     }
+
+    function navigateCreateMessage(){
+        navigate('/')
+    }
+
     return(
         <div className='container'>
-            <button style={{width:"10vw"}}onClick={navigateProfile}>Go to profile</button>
-            <Message username='test-user' title='Test Message Test Message Test Message Test Message Test Message Test Message Test Message' image='/src/assets/logo.png'/>
+            <div>
+                <button style={{width:"10vw"}}onClick={navigateProfile}>Go to profile</button>
+                <button style={{width:"auto"}}onClick={navigateCreateMessage}>Create a Message</button>
+            </div>
+            
+            <MessagePreview username='Test User' title='Test Title' image='/src/assets/logo.png'/>
         </div>
         
     );

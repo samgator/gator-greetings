@@ -4,6 +4,7 @@ import './index.css'
 import Home from './Home.jsx'
 import Login from './Login.jsx'
 import Profile from './Profile.jsx'
+import Message from './Message.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -11,6 +12,7 @@ createRoot(document.getElementById('root')).render(
       <Route path='/' element={<Login/>}/>
       <Route path='home'>
         <Route index element={<Home/>}/>
+        <Route path='message' element={<Message username="Test User" title="Test Title" image="/src/assets/logo.png" content="Test Message"/>}/>
         <Route path='profile' element={<Profile username="Test User" bio="Test Bio"/>}/>
       </Route>
     </Routes>
