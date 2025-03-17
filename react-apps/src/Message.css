@@ -1,0 +1,79 @@
+.preview{
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.853);
+}
+
+.preview:hover{
+    opacity: 100%;
+}
+
+.pic-and-name{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.profile-pic{
+    border-radius: 100%;
+    border-style: solid;
+    width: 50px;
+    height: 50px;;
+    margin-right: 10px;
+}
+
+.preview-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.preview-title{
+    width: 75%;
+    text-align: left;
+    font-size: 40px;
+}
+
+.preview-pic{
+    width: 150px;
+    height: auto;
+}
+
+.message-container{
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.853);
+    padding: 10px;
+}
+
+.message-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.message{
+    padding: 10px;
+    padding-left: 5%;
+    text-align: left;
+    font-size: 20px;
+}
+
+.exit-message-btn-container{
+    width: 60vw;
+    text-align: right;
+    margin: 0px;
+    padding: 0px;
+}
+
+.exit-btn{
+    text-align: right;
+}
