@@ -9,7 +9,7 @@ function Home() {
     }
 
     function navigateCreateMessage(){
-        navigate('/')
+        navigate('message-create')
     }
 
     return(

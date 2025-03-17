@@ -10,7 +10,7 @@ function Message({username, title, content, image}) {
 
     return ( 
         <div className='container'>
-            <div className='exit-btn-container'>
+            <div className='exit-message-btn-container'>
                 <button className='exit-btn' onClick={exitMessage}>Back to Home</button>
             </div>
             <div className='message-container'>

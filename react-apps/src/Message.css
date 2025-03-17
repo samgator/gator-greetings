@@ -66,3 +66,14 @@
     text-align: left;
     font-size: 20px;
 }
+
+.exit-message-btn-container{
+    width: 60vw;
+    text-align: right;
+    margin: 0px;
+    padding: 0px;
+}
+
+.exit-btn{
+    text-align: right;
+}
