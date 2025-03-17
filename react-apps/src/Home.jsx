@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import Message from './Message.jsx'
 
 function Home() {
     const navigate = useNavigate();
@@ -8,8 +9,8 @@ function Home() {
     }
     return(
         <div className='container'>
-            <h1>This is the temp home page</h1>
             <button style={{width:"10vw"}}onClick={navigateProfile}>Go to profile</button>
+            <Message username='test-user' title='Test Message Test Message Test Message Test Message Test Message Test Message Test Message' image='/src/assets/logo.png'/>
         </div>
         
     );
