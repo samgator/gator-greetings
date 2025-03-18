@@ -44,7 +44,7 @@ function Login() {
             return;
         }
        
-        const response = await fetch("http://localhost:5050/register", {
+        const response = await fetch("http://localhost:5050/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, email, password })
@@ -61,7 +61,7 @@ function Login() {
     // function to use login route upon user signup
     const navigate = useNavigate();
     async function handleLogin() {
-        const response = await fetch("http://localhost:5050/login", {
+        const response = await fetch("http://localhost:5050/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
