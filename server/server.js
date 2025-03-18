@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
 
-app.use("/record", records);
+app.use("/record", records); // MongoDB example
 app.use("/api/auth", googleRoutes); // GoogleOAuth
 app.use("/auth", authRoutes); // Regular Authentication
 
