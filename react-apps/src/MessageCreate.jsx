@@ -3,9 +3,37 @@ import { useNavigate } from 'react-router-dom'
 
 function MessageCreate() {
     const navigate = useNavigate();
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const [image, setImage] = useState('');
 
     function exitMessage(){
         navigate(-1);
+    }
+
+    async function handleSubmit() {
+        if (!title || !content) return alert('Title and message are required.');
+
+        const newMessage = {
+            author: userId,
+            content,
+        };
+
+        try {
+            const response = await fetch('http://localhost:5000/messages/post', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newMessage),
+            });
+
+            if (response.ok) {
+                navigate('/'); // navigate back after posting
+            } else {
+                console.error('Failed to post message.');
+            }
+        } catch (error) {
+            console.error('Error posting message:', error);
+        }
     }
 
     return (
@@ -17,16 +45,17 @@ function MessageCreate() {
                 <h1>Create a Message</h1>
                 <div className='title-and-input'>
                     <p>Enter a Title</p>
-                    <input className='input-field' type="text" placeholder="Title"></input>
+                    <input className='input-field' type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
                 </div>
                 <div className='title-and-input'>
                     <p>Enter your Message</p>
-                    <textarea className='input-field' type="text" placeholder="Message"></textarea>
+                    <textarea className='input-field' placeholder="Message" value={content} onChange={(e) => setContent(e.target.value)} />
                 </div>
                 <div className='title-and-input'>
                     <p>Add an image</p>
                     <input type="file"></input>
                 </div>
+                <button className="submit-btn" onClick={handleSubmit}>Post</button>
             </div>
         </div>
     );

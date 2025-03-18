@@ -71,6 +71,7 @@ function Login() {
         if (response.ok) {
             setToken(data.token);
             localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", data.userId);
             navigate('home');
         } else {
             setMessage(data.message || "Login Failed.");

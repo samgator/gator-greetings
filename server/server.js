@@ -26,6 +26,7 @@ app.use(passport.initialize());
 app.use("/record", records); // MongoDB example
 app.use("/api/auth", googleRoutes); // GoogleOAuth
 app.use("/auth", authRoutes); // Regular Authentication
+app.use("/messages", messageRoutes); // Messaging routes
 
 
 const PORT = process.env.PORT || 5050;
