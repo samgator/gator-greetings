@@ -17,7 +17,7 @@ router.post('/post', async (req, res) => {
 });
 
 // Fetch messages
-router.get('/', async (req, res) => {
+router.get('/fetch', async (req, res) => {
     try {
         const messages = await Message.find().sort({ timestamp: -1 }).populate('author', 'username');
         res.json(messages);
