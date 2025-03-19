@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import './Message.css'
 
-function MessagePreview({username, title, content, image}) {
+function MessagePreview({username, title, content, image, id}) {
     const navigate = useNavigate();
 
     function displayMessage(){
-        navigate('message');
+        navigate(`message/${id}`);
     }
 
     return (
