@@ -1,5 +1,6 @@
 import './MessageCreate.css'
 import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
 
 function MessageCreate() {
     const navigate = useNavigate();
@@ -14,25 +15,32 @@ function MessageCreate() {
     async function handleSubmit() {
         if (!title || !content) return alert('Title and message are required.');
 
+        const userId = localStorage.getItem('userId');
+        if (!userId) return alert('User is not logged in.');
+
         const newMessage = {
             author: userId,
+            title,
             content,
         };
 
         try {
-            const response = await fetch('http://localhost:5000/messages/post', {
+            const response = await fetch('http://localhost:5050/messages/post', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newMessage),
             });
 
             if (response.ok) {
-                navigate('/'); // navigate back after posting
+                navigate('/home'); // navigate back after posting
             } else {
-                console.error('Failed to post message.');
+                const errorData = await response.json(); 
+                console.error('Failed to post message.', errorData);
+                alert(`Failed to post message: ${errorData.details || 'Unknown error'}`);
             }
         } catch (error) {
             console.error('Error posting message:', error);
+            alert(`Error posting message: ${error.message}`);
         }
     }
 

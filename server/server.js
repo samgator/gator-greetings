@@ -11,6 +11,7 @@ import records from "./routes/record.js";
 import User from "./models/User.js";
 import jwt from "jsonwebtoken";
 import authRoutes from "./routes/authRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js"
 
 dotenv.config();
 connectDB();
@@ -18,7 +19,18 @@ connectMongoose();
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true}));
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5050/messages/post']; // update as needed
+app.use(cors({
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());

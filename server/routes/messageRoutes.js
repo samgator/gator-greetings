@@ -6,13 +6,13 @@ const router = express.Router();
 // Post a message
 router.post('/post', async (req, res) => {
     try {
-        const { author, content } = req.body;
-        const newMessage = new Message({ author, content });
+        const { author, title, content } = req.body;
+        const newMessage = new Message({ author, title, content });
         await newMessage.save();
 
         res.status(201).json(newMessage);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to post message' });
+        res.status(500).json({ error: 'Failed to post message', details: error.message });
     }
 });
 
