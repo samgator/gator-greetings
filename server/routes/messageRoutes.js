@@ -48,4 +48,17 @@ router.post('/comment/:messageId', async (req, res) => {
     }
 });
 
+// fetch by ID
+router.get('/:id', async (req, res) => {
+    try {
+        const message = await Message.findById(req.params.id).populate('author', 'username');
+        if (!message) {
+            return res.status(404).json({ error: 'Message not found' });
+        }
+        res.json(message);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch message.' });
+    }
+});
+
 export default router;
