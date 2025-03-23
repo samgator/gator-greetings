@@ -53,6 +53,7 @@ function Login() {
         
         if (response.ok) {
             setMessage("Account created successfully!");
+            loadLogin();
         } else {
             setMessage(data.message || "Sign Up Failed.");
         }
