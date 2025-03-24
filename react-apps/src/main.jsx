@@ -6,7 +6,6 @@ import Login from './Login.jsx'
 import Profile from './Profile.jsx'
 import Message from './Message.jsx'
 import MessageCreate from './MessageCreate.jsx'
-import MessageDetails from './MessageDetails.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
