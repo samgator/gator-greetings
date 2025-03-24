@@ -1,16 +1,62 @@
-.profilePic{
-    height: 300px;
-    width: 300px;
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0021A5, #FF7F50);
+    background-size: 250% 250%;
+    animation: gradientAnimation 8s ease infinite;
 }
 
-.bio-title{
+.card {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    padding: 20px;
+}
+
+.exit-btn-container {
+    position: absolute; 
+    top: 10px;
+    right: 10px;
+}
+
+.exit-btn {
+    background-color: transparent;
+    color: black; 
+    font-weight: bold;
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.exit-btn:hover {
+    color: #FA4616; 
+    transform: scale(1.2); 
+}
+
+.profilePic {
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    border: 4px solid #0021A5;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+}
+
+.bio-title {
     text-align: left;
     width: 100%;
     color: #FA4616;
     font-size: 18px;
 }
 
-.bio{
+.bio {
     text-align: left;
     width: 100%;
     border-style: solid;
@@ -21,13 +67,8 @@
     min-height: 10vh;
 }
 
-.exit-btn-container{
-    margin-left: 57vw;
-}
-
-.exit-btn{
-    background-color: transparent;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
