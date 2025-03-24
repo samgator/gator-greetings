@@ -28,11 +28,15 @@ function Home() {
         navigate('message-create')
     }
 
+    function logout() {
+        navigate('/')
+    }
     return(
         <div className='container'>
             <div>
                 <button style={{width:"10vw"}}onClick={navigateProfile}>Go to profile</button>
                 <button style={{width:"auto"}}onClick={navigateCreateMessage}>Create a Message</button>
+                <button style={{width: "auto"}}onClick={logout}>Logout</button>
             </div>
             <div className="messages-list">
                 {messages.map((msg) => (
