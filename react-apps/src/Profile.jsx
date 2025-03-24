@@ -7,6 +7,10 @@ function Profile({username, bio}) {
     function exitProfile(){
         navigate(-1);
     }
+
+    function editProfile() {
+        
+    }
     return ( 
         <div className="container">
             <div className='exit-btn-container'>
@@ -17,9 +21,10 @@ function Profile({username, bio}) {
                 <img src="https://placehold.co/300" className="profilePic"/>    
                 </div>
                 <div className="column">
+                    <button onClick = {editProfile}>Edit Profile</button>
                     <h1 className="title">{username}'s Profile</h1> 
                     <h2 className="bio-title">Bio:</h2>
-                    <div className="bio">{bio}</div>
+                    <div className = "bio"></div>
                 </div>
             </div>
         </div>

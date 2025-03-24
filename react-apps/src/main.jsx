@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')).render(
               <Route path='message' element={<Message username="Test User" title="Test Title" image="/src/assets/logo.png" content="Test Message" />} />
               <Route path="message/:id" element={<Message />} />
               <Route path='message-create' element={<MessageCreate />} />
-              <Route path='profile' element={<Profile username="Test User" bio="Test Bio" />} />
+              <Route path='profile' element={<Profile username="user"/>} />
           </Route>
       </Routes>
   </BrowserRouter>

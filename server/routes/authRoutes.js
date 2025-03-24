@@ -36,20 +36,31 @@ router.post("/register", async (req, res) => {
 
 // Login route
 router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ message: "Invalid email or password" });
-    }
+      const user = await User.findOne({ email });
 
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
+      if (!user || !(await bcrypt.compare(password, user.password))) {
+          return res.status(401).json({ message: "Invalid email or password" });
+      }
 
-    res.json({ message: "Login successful", token, _id: user._id, });
+      const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
+
+      res.json({
+          message: "Login successful",
+          token,
+          user: {
+              _id: user._id,
+              username: user.username, // Include username
+              bio: user.bio, // Include bio
+              image: user.image, // Include image
+              email: user.email,
+          },
+      });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: "Server error" });
   }
 });
+
 
 export default router;
