@@ -5,11 +5,17 @@ import './Profile.css'
 function ProfileEdit({ user, setUser }) {
     const [username, setUsername] = useState(user?.username || "");
     const [bio, setBio] = useState(user?.bio || "");
-    const [profilePicture, setProfilePicture] = useState(user?.profilePicture || ""); // Renamed from 'image'
+    const [profilePicture, setProfilePicture] = useState(user?.profilePicture || "");
     const navigate = useNavigate();
-    const userId = user?.userId; // Ensure userId is available
+    // Modified to access _id instead of userId
+    const userId = localStorage.getItem("userId");
 
     async function handleSave() {
+        if (!userId) {
+            alert("User ID is missing. Please log in again.");
+            return;
+        }
+
         const token = localStorage.getItem("token");
 
         console.log("Sending update request with:", { username, bio, profilePicture, userId });
@@ -64,7 +70,7 @@ function ProfileEdit({ user, setUser }) {
 
                 <div className="button-group">
                     <button onClick={handleSave} className="save-btn">Save</button>
-                    <button onClick={() => navigate("/home/profile")} className="cancel-btn">Cancel</button>
+                    <button onClick={() => navigate("/home/profile")} className="cancel-btn">Go Back</button>
                 </div>
             </div>
         </div>
