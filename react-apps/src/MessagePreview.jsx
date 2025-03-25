@@ -31,7 +31,6 @@ function MessagePreview({username, title, content, image, id, author}) {
         }
     }
 
-    console.log(author);
     fetchProfile(author._id);
 
     const profileImageUrl = profile?.profilePicture 

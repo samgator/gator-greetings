@@ -6,6 +6,7 @@ function Message() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [message, setMessage] = useState(null);
+    const [profile, setProfile] = useState(null);
 
     useEffect(() => {
         async function fetchMessage() {
@@ -17,8 +18,40 @@ function Message() {
                 console.error('Error fetching message:', error);
             }
         }
+
         fetchMessage();
     }, [id]);
+
+    useEffect(() => {
+        async function fetchProfile(userId) {
+            try {
+                
+                if (!userId) {
+                    console.error("No user ID found");
+                    return;
+                }
+    
+                const response = await fetch(`http://localhost:5050/profile/${userId}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    setProfile(data);
+                } else {
+                    console.error("Failed to fetch profile:", data.message);
+                }
+            } catch (error) {
+                console.error("Error fetching profile:", error);
+            }
+        }
+        
+        if (message && message.author) {
+            fetchProfile(message.author._id);
+        }
+    }, [message]);
+
+    const profileImageUrl = profile?.profilePicture 
+    ? `http://localhost:5050${profile.profilePicture}` 
+    : "https://placehold.co/300";
 
     const exitMessage = () => {
         navigate('/home');
@@ -35,7 +68,7 @@ function Message() {
             </div>
             <div className='message-container'>
                 <div className='pic-and-name'>
-                    <img className='profile-pic' src={message.image || '/src/assets/logo.png'} alt="Message" />
+                    <img className='profile-pic' src={profileImageUrl} alt="Message" />
                     <p>{message.author?.username || 'Unknown'}</p>
                 </div>
                 <div className='message-content'>
