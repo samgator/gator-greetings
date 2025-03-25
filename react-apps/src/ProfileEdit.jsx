@@ -5,28 +5,33 @@ import './Profile.css'
 function ProfileEdit({ user, setUser }) {
     const [username, setUsername] = useState(user?.username || "");
     const [bio, setBio] = useState(user?.bio || "");
-    const [image, setImage] = useState(user?.image || "");
+    const [profilePicture, setProfilePicture] = useState(user?.profilePicture || ""); // Renamed from 'image'
     const navigate = useNavigate();
+    const userId = user?.userId; // Ensure userId is available
 
     async function handleSave() {
         const token = localStorage.getItem("token");
 
-        const response = await fetch("http://localhost:5000/api/user/update", {
+        console.log("Sending update request with:", { username, bio, profilePicture, userId });
+
+        const response = await fetch(`http://localhost:5050/profile/update/${userId}`, { 
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify({ username, bio, image })
+            body: JSON.stringify({ username, bio, profilePicture }) 
         });
 
         const data = await response.json();
+        console.log("Response from server:", data);
+
         if (response.ok) {
-            setUser(data.user); // Update state
-            localStorage.setItem("user", JSON.stringify(data.user)); // Store in local storage
+            setUser(data.profile); // Update user state with the updated profile
+            alert("Profile updated successfully!");
             navigate("/home/profile"); // Redirect back to profile
         } else {
-            alert("Error updating profile");
+            alert(`Error updating profile: ${data.message || "Unknown error"}`);
         }
     }
 
@@ -52,8 +57,8 @@ function ProfileEdit({ user, setUser }) {
                 <label>Profile Image URL:</label>
                 <input 
                     type="text" 
-                    value={image} 
-                    onChange={(e) => setImage(e.target.value)} 
+                    value={profilePicture} // Updated field name
+                    onChange={(e) => setProfilePicture(e.target.value)} // Updated field name
                     placeholder="Paste image URL"
                 />
 
