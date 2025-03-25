@@ -63,9 +63,8 @@ router.get("/:userId", async (req, res) => {
 // update profiles
 router.put("/update/:userId", async (req, res) => {
     try {
-        const { username, bio, profilePicture } = req.body;
+        const { username, bio } = req.body;
         const userId = req.params.userId;
-        const filename = req.file.filename;
 
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             return res.status(400).json({ message: "Invalid user ID format" });
@@ -73,9 +72,14 @@ router.put("/update/:userId", async (req, res) => {
 
         const userObjectId = new mongoose.Types.ObjectId(userId);
 
+        let profilePicture = req.file ? `/profile/image/${req.file.filename}` : undefined;
+
+        const updateData = { username, bio };
+        if (profilePicture) updateData.profilePicture = profilePicture;
+
         const updatedProfile = await Profile.findOneAndUpdate(
             { userId: userObjectId }, 
-            { username, bio, profilePicture: `/profile/images/${filename}` },
+            updateData,
             { new: true } 
         );
 
