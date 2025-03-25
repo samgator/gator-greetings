@@ -89,4 +89,25 @@ router.put("/update/:userId", async (req, res) => {
     }
 });
 
+// Upload Profile Picture
+router.post("/upload", upload.single("profilePic"), (req, res) => {
+    res.json({ file: req.file });
+  });
+
+// Fetch Profile Picture by Filename
+router.get("/image/:filename", async (req, res) => {
+    try {
+      const file = await gfs.files.findOne({ filename: req.params.filename });
+  
+      if (!file) {
+        return res.status(404).json({ message: "File not found" });
+      }
+  
+      const readStream = gfs.createReadStream(file.filename);
+      readStream.pipe(res);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
 export default router;
