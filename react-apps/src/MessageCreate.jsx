@@ -18,17 +18,24 @@ function MessageCreate() {
         const userId = localStorage.getItem('userId');
         if (!userId) return alert('User is not logged in.');
 
-        const newMessage = {
-            author: userId,
-            title,
-            content,
-        };
+        const token = localStorage.getItem("token");
+
+        const formData = new FormData();
+        formData.append("author", userId);
+        formData.append("title", title);
+        formData.append("content", content);
+
+        if (image) {
+            formData.append("image", image);
+        }
 
         try {
             const response = await fetch('http://localhost:5050/messages/post', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newMessage),
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData,
             });
 
             if (response.ok) {
@@ -61,7 +68,11 @@ function MessageCreate() {
                 </div>
                 <div className='title-and-input'>
                     <p>Add an image</p>
-                    <input type="file"></input>
+                    <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={(e) => setImage(e.target.files[0])} 
+                />
                 </div>
                 <button className="submit-btn" onClick={handleSubmit}>Post</button>
             </div>
