@@ -1,0 +1,46 @@
+.home-container{
+    display: flex;
+}
+
+.left-sidebar{
+    width: 15vw;
+}
+
+.center-content{
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right-sidebar{
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.message-btn{
+    width: 15vw;
+    background-color: #FA4616;
+    border-color: rgba(255, 255, 255, 0);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-btn-content{
+    padding: 2px;
+    font-weight: bold;
+}
+
+.profile-btn{
+    margin-top: 5vh;
+    width: 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}

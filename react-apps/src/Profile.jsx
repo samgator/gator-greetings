@@ -1,15 +1,11 @@
-import './Profile.css'
-import { useNavigate } from 'react-router-dom'
+import './Profile.css';
+import { useNavigate } from 'react-router-dom';
 
-function Profile({username, bio}) {
+function Profile({ username, bio }) {
     const navigate = useNavigate();
 
-    function exitProfile(){
+    function exitProfile() {
         navigate(-1);
-    }
-
-    function editProfile() {
-        
     }
     return ( 
         <div className="container">
@@ -18,10 +14,9 @@ function Profile({username, bio}) {
             </div>
             <div className="card" style={{display: "flex", width: "50vw"}}>
                 <div className="column">
-                <img src="https://placehold.co/300" className="profilePic"/>    
+                    <img src="https://placehold.co/300" className="profilePic" alt="Profile" />
                 </div>
                 <div className="column">
-                    <button onClick = {editProfile}>Edit Profile</button>
                     <h1 className="title">{username}'s Profile</h1> 
                     <h2 className="bio-title">Bio:</h2>
                     <div className = "bio"></div>
