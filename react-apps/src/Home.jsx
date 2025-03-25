@@ -54,7 +54,8 @@ function Home() {
                             username={msg.author?.username || 'Unknown'} 
                             title={msg.title} 
                             content={msg.content}
-                            image={msg.image || '/src/assets/logo.png'} 
+                            image={msg.image || '/src/assets/logo.png'}
+                            author={msg.author} 
                         />
                     ))}
                 </div>
