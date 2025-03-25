@@ -12,6 +12,7 @@ let gfs;
 conn.once("open", () => {
   gfs = grid(conn.db, mongoose.mongo);
   gfs.collection("uploads");
+  console.log("GridFS is ready!");
 });
 
 export { gfs, conn };

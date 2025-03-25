@@ -61,8 +61,11 @@ router.get("/:userId", async (req, res) => {
 
 
 // update profiles
-router.put("/update/:userId", async (req, res) => {
+router.put("/update/:userId", upload.single("profilePicture"), async (req, res) => {
     try {
+        console.log("Request body:", req.body);
+        console.log("Uploaded file:", req.file);
+
         const { username, bio } = req.body;
         const userId = req.params.userId;
 
@@ -74,12 +77,14 @@ router.put("/update/:userId", async (req, res) => {
 
         let profilePicture = req.file ? `/profile/image/${req.file.filename}` : undefined;
 
-        const updateData = { username, bio };
-        if (profilePicture) updateData.profilePicture = profilePicture;
+        let updateFields = {};
+        if (username) updateFields.username = username;
+        if (bio) updateFields.bio = bio;
+        if (profilePicture) updateFields.profilePicture = profilePicture;
 
         const updatedProfile = await Profile.findOneAndUpdate(
             { userId: userObjectId }, 
-            updateData,
+            updateFields,
             { new: true } 
         );
 
@@ -90,12 +95,13 @@ router.put("/update/:userId", async (req, res) => {
         res.status(200).json({ message: "Profile updated successfully!", profile: updatedProfile });
 
     } catch (error) {
+        console.error("Error in file upload:", error);
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
 
 // Upload Profile Picture
-router.post("/upload", upload.single("profilePic"), (req, res) => {
+router.post("/upload", upload.single("profilePicture"), (req, res) => {
     res.json({ file: req.file });
   });
 

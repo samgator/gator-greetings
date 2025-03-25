@@ -11,14 +11,18 @@ import jwt from "jsonwebtoken";
 import authRoutes from "./routes/authRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
+import multer from "multer";
+import upload from "./config/storage.js";
+import { gfs, conn } from "./config/gridfsConfig.js";
 
 dotenv.config();
 connectDB();
 connectMongoose();
 
+
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5050/messages/post']; // update as needed
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5050/']; // update as needed
 app.use(cors({
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -31,6 +35,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/record", records); // MongoDB example

@@ -9,6 +9,9 @@ const storage = new GridFsStorage({
     return {
       filename: `profile_${Date.now()}_${file.originalname}`,
       bucketName: "uploads",
+      metadata: {
+        fieldName: file.fieldname
+      }
     };
   },
 });

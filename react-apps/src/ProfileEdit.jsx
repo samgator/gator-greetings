@@ -18,22 +18,28 @@ function ProfileEdit({ user, setUser }) {
 
         const token = localStorage.getItem("token");
 
-        console.log("Sending update request with:", { username, bio, profilePicture, userId });
+        const formData = new FormData();
+        formData.append("username", username);
+        formData.append("bio", bio);
 
-        const response = await fetch(`http://localhost:5050/profile/update/${userId}`, { 
+        if (profilePicture) {
+            formData.append("profilePicture", profilePicture);
+        }
+
+        console.log("Sending update request with:", formData);
+
+        const response = await fetch(`http://localhost:5050/profile/update/${userId}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify({ username, bio, profilePicture }) 
+            body: formData,
         });
 
         const data = await response.json();
         console.log("Response from server:", data);
 
         if (response.ok) {
-            setUser(data.profile); // Update user state with the updated profile
             alert("Profile updated successfully!");
             navigate("/home/profile"); // Redirect back to profile
         } else {
@@ -60,12 +66,11 @@ function ProfileEdit({ user, setUser }) {
                     placeholder="Write something about yourself"
                 ></textarea>
 
-                <label>Profile Image URL:</label>
+                <label>Profile Image Upload:</label>
                 <input 
-                    type="text" 
-                    value={profilePicture} // Updated field name
-                    onChange={(e) => setProfilePicture(e.target.value)} // Updated field name
-                    placeholder="Paste image URL"
+                type="file" 
+                accept="image/*" 
+                onChange={(e) => setProfilePicture(e.target.files[0])} 
                 />
 
                 <div className="button-group">
