@@ -63,8 +63,6 @@ router.get("/:userId", async (req, res) => {
 // update profiles
 router.put("/update/:userId", upload.single("profilePicture"), async (req, res) => {
     try {
-        console.log("Request body:", req.body);
-        console.log("Uploaded file:", req.file);
 
         const { username, bio } = req.body;
         const userId = req.params.userId;

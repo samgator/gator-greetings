@@ -26,8 +26,6 @@ function ProfileEdit({ user, setUser }) {
             formData.append("profilePicture", profilePicture);
         }
 
-        console.log("Sending update request with:", formData);
-
         const response = await fetch(`http://localhost:5050/profile/update/${userId}`, {
             method: "PUT",
             headers: {
@@ -37,7 +35,7 @@ function ProfileEdit({ user, setUser }) {
         });
 
         const data = await response.json();
-        console.log("Response from server:", data);
+       
 
         if (response.ok) {
             alert("Profile updated successfully!");
