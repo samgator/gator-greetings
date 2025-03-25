@@ -65,6 +65,7 @@ router.put("/update/:userId", async (req, res) => {
     try {
         const { username, bio, profilePicture } = req.body;
         const userId = req.params.userId;
+        const filename = req.file.filename;
 
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             return res.status(400).json({ message: "Invalid user ID format" });
@@ -74,7 +75,7 @@ router.put("/update/:userId", async (req, res) => {
 
         const updatedProfile = await Profile.findOneAndUpdate(
             { userId: userObjectId }, 
-            { username, bio, profilePicture },
+            { username, bio, profilePicture: `/profile/images/${filename}` },
             { new: true } 
         );
 
