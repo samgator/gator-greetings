@@ -31,7 +31,7 @@ function Message() {
     return ( 
         <div className='container'>
             <div className='exit-message-btn-container'>
-                <button className='exit-btn' onClick={exitMessage}>Back to Home</button>
+                <button className='exit-message-btn' onClick={exitMessage}>Back to Home</button>
             </div>
             <div className='message-container'>
                 <div className='pic-and-name'>
