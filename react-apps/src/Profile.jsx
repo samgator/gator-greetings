@@ -39,6 +39,10 @@ function Profile() {
         navigate("/home/profile/edit"); // Navigate to the edit profile page
     }
 
+    const profileImageUrl = profile?.profilePicture 
+    ? `http://localhost:5050${profile.profilePicture}` 
+    : "https://placehold.co/300";
+
 
     return (
         <div className="profile-container">
@@ -47,10 +51,14 @@ function Profile() {
                     <button className="exit-btn" onClick={exitProfile}>X</button>
                 </div>
                 {profile ? (
-                <>
-                    <div className="column">
-                        <img src={profile.profilePicture || "https://placehold.co/300"} className="profilePic" alt="Profile" />
-                    </div>
+                    <>
+                        <div className="column">
+                            <img 
+                                src={profileImageUrl} 
+                                className="profilePic" 
+                                alt="Profile" 
+                            />
+                        </div>
                     <div className="column">
                         <button className="edit-btn" onClick={editProfile}>Edit Profile</button>
                         <h1 className="title">{profile.username}'s Profile</h1>

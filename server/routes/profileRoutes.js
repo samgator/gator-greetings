@@ -2,7 +2,8 @@ import express from 'express';
 import Profile from '../models/Profile.js';
 import upload from "../config/storage.js";
 import mongoose from 'mongoose';
-import { gfs } from "../config/gridfsConfig.js";
+import { gfs, gridfsBucket } from "../config/gridfsConfig.js";
+const { ObjectId } = mongoose.Types;
 
 const router = express.Router();
 
@@ -106,17 +107,18 @@ router.post("/upload", upload.single("profilePicture"), (req, res) => {
 // Fetch Profile Picture by Filename
 router.get("/image/:filename", async (req, res) => {
     try {
-      const file = await gfs.files.findOne({ filename: req.params.filename });
-  
-      if (!file) {
-        return res.status(404).json({ message: "File not found" });
-      }
-  
-      const readStream = gfs.createReadStream(file.filename);
-      readStream.pipe(res);
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
+        
+        const file = await gfs.files.findOne({ filename: req.params.filename });
 
+        if (!file) {
+            return res.status(404).json({ message: "File not found" });
+        }
+
+        const readStream = gridfsBucket.openDownloadStream(file._id);
+        readStream.pipe(res);
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 export default router;
