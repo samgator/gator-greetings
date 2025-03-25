@@ -21,7 +21,7 @@
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.15.0",
-    "mongoose": "^8.12.1",
+    "mongoose": "^8.13.0",
     "npm": "^11.2.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"

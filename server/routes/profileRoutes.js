@@ -1,5 +1,6 @@
 import express from 'express';
 import Profile from '../models/Profile.js';
+import mongoose from 'mongoose';
 
 const router = express.Router();
 
@@ -18,7 +19,6 @@ router.post("/create", async (req, res) => {
             return res.status(400).json({ message: "Profile already exists." });
         }
 
-        // Create the new profile
         const newProfile = new Profile({
             userId,
             username,
@@ -37,13 +37,23 @@ router.post("/create", async (req, res) => {
 // Fetch Profile
 router.get("/:userId", async (req, res) => {
     try {
-        const profile = await Profile.findOne({ userId: req.params.userId });
-        if (!profile) {
-            return res.status(404).json({ message: "Profile not found." });
+        const { userId } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ message: "Invalid user ID format" });
         }
-        res.status(200).json(profile);
+
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+        const profile = await Profile.findOne({ userId: userObjectId });
+
+        if (!profile) {
+            return res.status(404).json({ message: "Profile not found" });
+        }
+
+        res.json(profile);
     } catch (error) {
-        res.status(500).json({ message: "Server error", error: error.message });
+        console.error("Error fetching profile:", error.message);
+        res.status(500).json({ message: "Server error" });
     }
 });
 
