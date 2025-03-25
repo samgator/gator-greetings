@@ -3,7 +3,6 @@ import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import passport from "passport";
 import bcrypt from "bcrypt";
 import { connectDB, connectMongoose } from "./db/connection.js";
 import records from "./routes/record.js";
@@ -33,7 +32,6 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(passport.initialize());
 
 app.use("/record", records); // MongoDB example
 app.use("/auth", authRoutes); // Regular Authentication Routes
