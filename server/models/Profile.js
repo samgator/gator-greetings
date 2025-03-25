@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 
 const profileSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    bio: { type: String, required: true},
-    image: { type: String }, // Store image URL or file path
-}, {
-    timestamps: true
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, unique: true },
+    username: { type: String, required: true },
+    bio: { type: String, default: "" },
+    profilePicture: { type: String, default: "" }, // Store image URL or file path
 });
 
 const Profile = mongoose.model("Profile", profileSchema);

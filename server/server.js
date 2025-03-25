@@ -10,7 +10,8 @@ import records from "./routes/record.js";
 import User from "./models/User.js";
 import jwt from "jsonwebtoken";
 import authRoutes from "./routes/authRoutes.js";
-import messageRoutes from "./routes/messageRoutes.js"
+import messageRoutes from "./routes/messageRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -35,8 +36,9 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 app.use("/record", records); // MongoDB example
-app.use("/auth", authRoutes); // Regular Authentication
+app.use("/auth", authRoutes); // Regular Authentication Routes
 app.use("/messages", messageRoutes); // Messaging routes
+app.use("/profile", profileRoutes); // Profile routes
 
 
 const PORT = process.env.PORT || 5050;

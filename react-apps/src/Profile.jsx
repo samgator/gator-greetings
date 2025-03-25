@@ -5,7 +5,7 @@ function Profile({ username, bio }) {
     const navigate = useNavigate();
 
     function exitProfile() {
-        navigate(-1);
+        navigate('/home');
     }
 
     function editProfile() {
