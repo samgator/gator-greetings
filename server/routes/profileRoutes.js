@@ -1,6 +1,8 @@
 import express from 'express';
 import Profile from '../models/Profile.js';
+import upload from "../config/storage.js";
 import mongoose from 'mongoose';
+import { gfs } from "../config/gridfsConfig.js";
 
 const router = express.Router();
 
