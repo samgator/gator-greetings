@@ -74,6 +74,17 @@
     padding: 0px;
 }
 
-.exit-btn{
+.exit-message-btn{
     text-align: right;
+    background-color: transparent;
+    color: black; 
+    font-weight: bold;
+    font-size: 22px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.exit-message-btn:hover{
+    color: #FA4616; 
 }

@@ -53,6 +53,7 @@ function Login() {
         
         if (response.ok) {
             setMessage("Account created successfully!");
+            loadLogin();
         } else {
             setMessage(data.message || "Sign Up Failed.");
         }
@@ -93,10 +94,6 @@ function Login() {
                     </div>
                     <button className="blue-btn" onClick={handleLogin}>Log In</button>
                     <button className="orange-btn" onClick={loadSignUp}>Sign Up</button>
-                    <button className="google-signin">
-                        <img src="/src/assets/google.png" height={30} width={30}></img> 
-                        <div>Sign in with Google</div>
-                    </button>
                 </div>
             </div>
         );
