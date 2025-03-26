@@ -7,6 +7,7 @@ function Message() {
     const navigate = useNavigate();
     const [message, setMessage] = useState(null);
     const [profile, setProfile] = useState(null);
+    const [author, setAuthor] = useState(null);
 
     useEffect(() => {
         async function fetchMessage() {
@@ -36,6 +37,7 @@ function Message() {
                 
                 if (response.ok) {
                     setProfile(data);
+                    setAuthor(data.username);
                 } else {
                     console.error("Failed to fetch profile:", data.message);
                 }
@@ -77,12 +79,12 @@ function Message() {
             <div className='message-container'>
                 <div className='pic-and-name'>
                     <img className='profile-pic' src={profileImageUrl} alt="Message" onClick={displayProfile}/>
-                    <p>{message.author?.username || 'Unknown'}</p>
+                    <p>{author || 'Unknown'}</p>
                 </div>
                 <div className='message-content'>
                     <div className='preview-content'>
                         <h1 className='preview-title'>{message.title}</h1>
-                        <img className='preview-pic' src={messageImageUrl || '/src/assets/logo.png'} alt="Message"/>
+                        <img className='preview-pic' src={messageImageUrl || '/src/assets/logo.png'} alt=""/>
                     </div>
                     <p className='message'>{message.content}</p>
                 </div>
