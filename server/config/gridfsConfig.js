@@ -3,10 +3,7 @@ import Grid from "gridfs-stream";
 import dotenv from "dotenv";
 dotenv.config();
 
-const conn = mongoose.createConnection(process.env.ATLAS_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const conn = mongoose.createConnection(process.env.ATLAS_URI, {});
 
 let gfs, gridfsBucket;
 conn.once('open', () => {
