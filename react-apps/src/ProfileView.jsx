@@ -26,7 +26,7 @@ function ProfileView() {
     }, [userId]);
 
     function exitProfile() {
-        navigate('/home');
+        navigate(-1);
     }
 
 
