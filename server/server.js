@@ -3,23 +3,26 @@ import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import passport from "passport";
 import bcrypt from "bcrypt";
-import googleRoutes from "./routes/googleRoutes.js";
 import { connectDB, connectMongoose } from "./db/connection.js";
 import records from "./routes/record.js";
 import User from "./models/User.js";
 import jwt from "jsonwebtoken";
 import authRoutes from "./routes/authRoutes.js";
-import messageRoutes from "./routes/messageRoutes.js"
+import messageRoutes from "./routes/messageRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
+import multer from "multer";
+import upload from "./config/storage.js";
+import { gfs, conn } from "./config/gridfsConfig.js";
 
 dotenv.config();
 connectDB();
 connectMongoose();
 
+
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5050/messages/post']; // update as needed
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5050/']; // update as needed
 app.use(cors({
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -32,13 +35,13 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(passport.initialize());
 
 app.use("/record", records); // MongoDB example
-app.use("/api/auth", googleRoutes); // GoogleOAuth
-app.use("/auth", authRoutes); // Regular Authentication
+app.use("/auth", authRoutes); // Regular Authentication Routes
 app.use("/messages", messageRoutes); // Messaging routes
+app.use("/profile", profileRoutes); // Profile routes
 
 
 const PORT = process.env.PORT || 5050;

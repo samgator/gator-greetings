@@ -29,6 +29,10 @@ function Home() {
         navigate('message-create')
     }
 
+    function navigateLogin(){
+        navigate('/')
+    }
+
     return(
         <div className='home-container'>
             <div className='left-sidebar'>
@@ -39,15 +43,18 @@ function Home() {
                     <p className='message-btn-content'>Create a Message</p>
                     <img className='message-btn-content' style={{width:'1vw', height:'1vw'}} src='/src/assets/edit_icon.png'/>
                 </button>
+                <button className='logout-btn' onClick={navigateLogin}>
+                    <p className='message-btn-content'>Logout</p>
+                </button>
                 <div className="messages-list">
                     {messages.map((msg) => (
                         <MessagePreview 
                             key={msg._id} 
                             id={msg._id} 
-                            username={msg.author?.username || 'Unknown'} 
                             title={msg.title} 
                             content={msg.content}
-                            image={msg.image || '/src/assets/logo.png'} 
+                            image={`http://localhost:5050${msg.image}` || '/src/assets/logo.png'}
+                            author={msg.author} 
                         />
                     ))}
                 </div>

@@ -1,13 +1,18 @@
 import express from 'express';
 import Message from '../models/Message.js';
+import upload from "../config/storage.js";
+import { gfs, gridfsBucket } from "../config/gridfsConfig.js";
 
 const router = express.Router();
 
 // Post a message
-router.post('/post', async (req, res) => {
+router.post('/post', upload.single("image"), async (req, res) => {
     try {
         const { author, title, content } = req.body;
-        const newMessage = new Message({ author, title, content });
+
+        let image = req.file ? `/messages/image/${req.file.filename}` : undefined;
+
+        const newMessage = new Message({ author, title, content, image: image || " " });
         await newMessage.save();
 
         res.status(201).json(newMessage);
@@ -58,6 +63,30 @@ router.get('/:id', async (req, res) => {
         res.json(message);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch message.' });
+    }
+});
+
+// Upload Message Picture
+router.post("/upload", upload.single("image"), (req, res) => {
+    res.json({ file: req.file });
+  });
+
+// Fetch Message Picture by Filename
+router.get("/image/:filename", async (req, res) => {
+    try {
+        
+        const file = await gfs.files.findOne({ filename: req.params.filename });
+
+        if (!file) {
+            return res.status(404).json({ message: "File not found" });
+        }
+
+        const readStream = gridfsBucket.openDownloadStream(file._id);
+        res.set('Content-Type', file.contentType);
+        readStream.pipe(res);
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 });
 

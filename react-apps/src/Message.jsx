@@ -6,6 +6,8 @@ function Message() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [message, setMessage] = useState(null);
+    const [profile, setProfile] = useState(null);
+    const [author, setAuthor] = useState(null);
 
     useEffect(() => {
         async function fetchMessage() {
@@ -17,8 +19,45 @@ function Message() {
                 console.error('Error fetching message:', error);
             }
         }
+
         fetchMessage();
     }, [id]);
+
+    useEffect(() => {
+        async function fetchProfile(userId) {
+            try {
+                
+                if (!userId) {
+                    console.error("No user ID found");
+                    return;
+                }
+    
+                const response = await fetch(`http://localhost:5050/profile/${userId}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    setProfile(data);
+                    setAuthor(data.username);
+                } else {
+                    console.error("Failed to fetch profile:", data.message);
+                }
+            } catch (error) {
+                console.error("Error fetching profile:", error);
+            }
+        }
+
+        if (message && message.author) {
+            fetchProfile(message.author._id);
+        }
+    }, [message]);
+
+    const profileImageUrl = profile?.profilePicture 
+    ? `http://localhost:5050${profile.profilePicture}` 
+    : "https://placehold.co/300";
+
+    let messageImageUrl = message?.image 
+    ? `http://localhost:5050${message.image}` 
+    : "/src/assets/logo.png";
 
     const exitMessage = () => {
         navigate('/home');
@@ -35,13 +74,13 @@ function Message() {
             </div>
             <div className='message-container'>
                 <div className='pic-and-name'>
-                    <img className='profile-pic' src={message.image || '/src/assets/logo.png'} alt="Message" />
-                    <p>{message.author?.username || 'Unknown'}</p>
+                    <img className='profile-pic' src={profileImageUrl} alt="Message" />
+                    <p>{author || 'Unknown'}</p>
                 </div>
                 <div className='message-content'>
                     <div className='preview-content'>
                         <h1 className='preview-title'>{message.title}</h1>
-                        <img className='preview-pic' src={message.image || '/src/assets/logo.png'} alt="Message"/>
+                        <img className='preview-pic' src={messageImageUrl || '/src/assets/logo.png'} alt=""/>
                     </div>
                     <p className='message'>{message.content}</p>
                 </div>

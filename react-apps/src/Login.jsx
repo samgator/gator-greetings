@@ -57,6 +57,28 @@ function Login() {
         } else {
             setMessage(data.message || "Sign Up Failed.");
         }
+
+        // Create user profile
+        const profileResponse = await fetch("http://localhost:5050/profile/create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userId: data.userId,
+                username: username,
+                bio: " ", // Default bio
+                profilePicture: "/src/assets/profile_icon.png"
+            })
+        });
+
+        const profileData = await profileResponse.json();
+
+        if (profileResponse.ok) {
+            console.log("Profile created:", profileData);
+        } else {
+            console.error("Profile creation failed:", profileData.message);
+        }
+
+        handleLogin();
     }
 
     // function to use login route upon user signup
