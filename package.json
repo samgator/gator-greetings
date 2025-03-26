@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
@@ -13,6 +14,7 @@
     "multer-gridfs-storage": "^5.0.2",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
-    "react-router-dom": "^7.3.0"
+    "react": "^19.0.0",
+    "react-router-dom": "^7.4.0"
   }
 }

@@ -1,19 +1,12 @@
 import express from "express";
-import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import bcrypt from "bcrypt";
 import { connectDB, connectMongoose } from "./db/connection.js";
 import records from "./routes/record.js";
-import User from "./models/User.js";
-import jwt from "jsonwebtoken";
 import authRoutes from "./routes/authRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
-import multer from "multer";
-import upload from "./config/storage.js";
-import { gfs, conn } from "./config/gridfsConfig.js";
 
 dotenv.config();
 connectDB();
