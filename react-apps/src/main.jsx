@@ -7,6 +7,7 @@ import Profile from './Profile.jsx'
 import Message from './Message.jsx'
 import MessageCreate from './MessageCreate.jsx'
 import ProfileEdit from './ProfileEdit.jsx'
+import ProfileView from './ProfileView.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
               <Route path='message-create' element={<MessageCreate />} />
               <Route path='profile' element={<Profile />} />
               <Route path='profile/edit' element={<ProfileEdit />} />
+              <Route path="profileview/:userId" element={<ProfileView />} />
           </Route>
       </Routes>
   </BrowserRouter>

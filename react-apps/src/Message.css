@@ -25,6 +25,10 @@
     margin-right: 10px;
 }
 
+.profile-pic:hover{
+    cursor: pointer;
+}
+
 .preview-content{
     display: flex;
     flex-direction: row;

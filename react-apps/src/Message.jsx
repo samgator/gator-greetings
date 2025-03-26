@@ -67,6 +67,10 @@ function Message() {
         return <p>Loading...</p>;
     }
 
+    const displayProfile = () => {
+        navigate(`/home/profileview/${message.author?._id}`);
+    };
+
     return ( 
         <div className='container'>
             <div className='exit-message-btn-container'>
@@ -74,7 +78,7 @@ function Message() {
             </div>
             <div className='message-container'>
                 <div className='pic-and-name'>
-                    <img className='profile-pic' src={profileImageUrl} alt="Message" />
+                    <img className='profile-pic' src={profileImageUrl} alt="Message" onClick={displayProfile}/>
                     <p>{author || 'Unknown'}</p>
                 </div>
                 <div className='message-content'>
