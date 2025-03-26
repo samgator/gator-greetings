@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Message.css'
 
-function MessagePreview({username, title, content, image, id, author}) {
+function MessagePreview({title, content, image, id, author}) {
     const [profile, setProfile] = useState(null);
+    const [username, setUsername] = useState(null);
     const navigate = useNavigate();
 
     function displayMessage(){
@@ -23,6 +24,7 @@ function MessagePreview({username, title, content, image, id, author}) {
             
             if (response.ok) {
                 setProfile(data);
+                setUsername(data.username);
             } else {
                 console.error("Failed to fetch profile:", data.message);
             }
@@ -36,6 +38,7 @@ function MessagePreview({username, title, content, image, id, author}) {
     const profileImageUrl = profile?.profilePicture 
     ? `http://localhost:5050${profile.profilePicture}` 
     : "https://placehold.co/300";
+    
 
     return (
         <button className='preview' onClick={displayMessage}>
@@ -45,7 +48,7 @@ function MessagePreview({username, title, content, image, id, author}) {
             </div>
             <div className='preview-content'>
                 <h1 className='preview-title'>{title}</h1>
-                <img className='preview-pic' src={image}/>
+                <img className='preview-pic' src={image} alt="" />
             </div>
         </button>
     );

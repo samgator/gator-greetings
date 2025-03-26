@@ -51,10 +51,9 @@ function Home() {
                         <MessagePreview 
                             key={msg._id} 
                             id={msg._id} 
-                            username={msg.author?.username || 'Unknown'} 
                             title={msg.title} 
                             content={msg.content}
-                            image={msg.image || '/src/assets/logo.png'}
+                            image={`http://localhost:5050${msg.image}` || '/src/assets/logo.png'}
                             author={msg.author} 
                         />
                     ))}
