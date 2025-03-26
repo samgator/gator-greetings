@@ -10,7 +10,7 @@ router.post('/post', upload.single("image"), async (req, res) => {
     try {
         const { author, title, content } = req.body;
 
-        let image = req.file ? `/message/image/${req.file.filename}` : undefined;
+        let image = req.file ? `/messages/image/${req.file.filename}` : undefined;
 
         const newMessage = new Message({ author, title, content, image: image || " " });
         await newMessage.save();
@@ -67,7 +67,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Upload Message Picture
-router.post("/upload", upload.single("profilePicture"), (req, res) => {
+router.post("/upload", upload.single("image"), (req, res) => {
     res.json({ file: req.file });
   });
 
@@ -82,6 +82,7 @@ router.get("/image/:filename", async (req, res) => {
         }
 
         const readStream = gridfsBucket.openDownloadStream(file._id);
+        res.set('Content-Type', file.contentType);
         readStream.pipe(res);
 
     } catch (err) {

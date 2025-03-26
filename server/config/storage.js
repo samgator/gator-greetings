@@ -7,7 +7,7 @@ const storage = new GridFsStorage({
   url: process.env.ATLAS_URI,
   file: (req, file) => {
     return {
-      filename: `profile_${Date.now()}_${file.originalname}`,
+      filename: `image_${Date.now()}_${file.originalname}`,
       bucketName: "uploads",
       metadata: {
         fieldName: file.fieldname

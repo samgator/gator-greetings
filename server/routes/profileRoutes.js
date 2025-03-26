@@ -115,6 +115,7 @@ router.get("/image/:filename", async (req, res) => {
         }
 
         const readStream = gridfsBucket.openDownloadStream(file._id);
+        res.set('Content-Type', file.contentType);
         readStream.pipe(res);
 
     } catch (err) {

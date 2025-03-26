@@ -43,7 +43,7 @@ function Message() {
                 console.error("Error fetching profile:", error);
             }
         }
-        
+
         if (message && message.author) {
             fetchProfile(message.author._id);
         }
@@ -52,6 +52,10 @@ function Message() {
     const profileImageUrl = profile?.profilePicture 
     ? `http://localhost:5050${profile.profilePicture}` 
     : "https://placehold.co/300";
+
+    let messageImageUrl = message?.image 
+    ? `http://localhost:5050${message.image}` 
+    : "/src/assets/logo.png";
 
     const exitMessage = () => {
         navigate('/home');
@@ -74,7 +78,7 @@ function Message() {
                 <div className='message-content'>
                     <div className='preview-content'>
                         <h1 className='preview-title'>{message.title}</h1>
-                        <img className='preview-pic' src={message.image || '/src/assets/logo.png'} alt="Message"/>
+                        <img className='preview-pic' src={messageImageUrl || '/src/assets/logo.png'} alt="Message"/>
                     </div>
                     <p className='message'>{message.content}</p>
                 </div>
