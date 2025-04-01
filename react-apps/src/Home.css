@@ -30,24 +30,26 @@
     justify-content: center;
 }
 
-.logout-btn{
-    width: 15vw;
-    background-color: #e20606;
-    border-color: rgba(255, 255, 255, 0);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .message-btn-content{
     padding: 2px;
     font-weight: bold;
 }
 
-.profile-btn{
-    margin-top: 5vh;
+.logout-btn{
+    margin-top: 3vh;
     width: 6vw;
+    height: 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.profile-btn{
+    margin-top: 3vh;
+    width: 6vw;
+    height: 6vw;
     display: flex;
     flex-direction: column;
     align-items: center;
