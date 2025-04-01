@@ -73,9 +73,11 @@ function Message() {
 
     return ( 
         <div className='container'>
+
             <div className='exit-message-btn-container'>
                 <button className='exit-message-btn' onClick={exitMessage}>Back to Home</button>
             </div>
+
             <div className='message-container'>
                 <div className='pic-and-name'>
                     <img className='profile-pic' src={profileImageUrl} alt="Message" onClick={displayProfile}/>
@@ -88,7 +90,16 @@ function Message() {
                     </div>
                     <p className='message'>{message.content}</p>
                 </div>
+                <div className='message-replies-container'>
+                    <div className='message-reply-bar'>
+                        <input type='text' className='reply-input' placeholder='Reply...'></input>
+                        <button className='reply-btn'>
+                            <img style={{width:'2vw'}} src='/src/assets/send_icon.png'/>
+                        </button>
+                    </div>
+                </div>
             </div>
+
         </div>
         
     );

@@ -92,3 +92,44 @@
 .exit-message-btn:hover{
     color: #FA4616; 
 }
+
+.message-reply-bar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.reply-input{
+    width: 75%;
+    height: 1.5vw;
+    padding: 10px;
+    border: 2px solid #0021A5;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.reply-input:focus {
+    outline: none;
+    border-color: #FA4616;
+    box-shadow: 0 0 8px #FA4616;
+  }
+
+.reply-btn{
+    width: 2.8vw;
+    height: 2.8vw;
+    background-color: #0021A5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    margin-left: 1vw;
+    margin-bottom: 1vh;
+}
+
+.reply-btn:hover{
+    outline: none;
+    background-color: #FA4616;
+    box-shadow: 0 0 8px #FA4616;
+}
