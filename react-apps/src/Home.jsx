@@ -43,9 +43,6 @@ function Home() {
                     <p className='message-btn-content'>Create a Message</p>
                     <img className='message-btn-content' style={{width:'1vw', height:'1vw'}} src='/src/assets/edit_icon.png'/>
                 </button>
-                <button className='logout-btn' onClick={navigateLogin}>
-                    <p className='message-btn-content'>Logout</p>
-                </button>
                 <div className="messages-list">
                     {messages.map((msg) => (
                         <MessagePreview 
@@ -60,6 +57,10 @@ function Home() {
                 </div>
             </div>
             <div className='right-sidebar'>
+                <button className='logout-btn' onClick={navigateLogin}>
+                    <img style={{width:'3.5vw'}} src='/src/assets/logout_icon.png'/>
+                    <p className='message-btn-content'>Logout</p>
+                </button>
                 <button className='profile-btn' onClick={navigateProfile}>
                     <img style={{width:'4vw'}} src='/src/assets/profile_icon.png'/>
                     <p>Profile</p>
