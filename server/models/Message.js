@@ -5,9 +5,15 @@ const messageSchema = new mongoose.Schema({
     title: {type: String, required: true },
     content: { type: String, required: true },
     image: { type: String, default: "" },
-    replies: {type: String, default: ""}
+    replies: {type: [replySchema], default: []}
 }, {
     timestamps: true
+});
+
+const replySchema = new mongoose.Schema({
+    content: { type: String, required: true },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    createdAt: { type: Date, default: Date.now }
 });
 
 const Message = mongoose.model("Message", messageSchema);

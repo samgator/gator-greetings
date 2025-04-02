@@ -8,6 +8,8 @@ function Message() {
     const [message, setMessage] = useState(null);
     const [profile, setProfile] = useState(null);
     const [author, setAuthor] = useState(null);
+    const [replies, setReplies] = useState([]);
+    const [newReply, setNewReply] = useState('');
 
     useEffect(() => {
         async function fetchMessage() {
