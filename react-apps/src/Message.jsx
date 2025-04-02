@@ -73,6 +73,34 @@ function Message() {
         navigate(`/home/profileview/${message.author?._id}`);
     };
 
+    const handleReplySubmit = async () => {
+        if (!newReply.trim()) return;
+    
+        try {
+            const response = await fetch(`http://localhost:5050/messages/${id}/replies`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                // need to get user token maybe?
+                body: JSON.stringify({
+                    replyContent: newReply,
+                    authorId: 'currentUserId', 
+                }),
+            });
+    
+            if (response.ok) {
+                const reply = await response.json();
+                setReplies([...replies, reply]);
+                setNewReply('');
+            } else {
+                console.error('Failed to submit reply');
+            }
+        } catch (error) {
+            console.error('Error submitting reply:', error);
+        }
+    };
+
     return ( 
         <div className='container'>
 
