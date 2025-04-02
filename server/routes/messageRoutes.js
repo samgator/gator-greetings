@@ -90,30 +90,30 @@ router.get("/image/:filename", async (req, res) => {
     }
 });
 
-// Post messages
-app.post('/messages/:id/replies', async (req, res) => {
-    const { id } = req.params;
-    const { replyContent, authorId } = req.body;
+// // Post messages
+// app.post('/messages/:id/replies', async (req, res) => {
+//     const { id } = req.params;
+//     const { replyContent, authorId } = req.body;
 
-    try {
-        const message = await Message.findById(id);
-        if (!message) {
-            return res.status(404).json({ message: 'Message not found' });
-        }
+//     try {
+//         const message = await Message.findById(id);
+//         if (!message) {
+//             return res.status(404).json({ message: 'Message not found' });
+//         }
 
-        const reply = {
-            content: replyContent,
-            author: authorId,
-            createdAt: new Date(),
-        };
+//         const reply = {
+//             content: replyContent,
+//             author: authorId,
+//             createdAt: new Date(),
+//         };
 
-        message.replies.push(reply);
-        await message.save();
+//         message.replies.push(reply);
+//         await message.save();
 
-        res.status(201).json(reply);
-    } catch (error) {
-        res.status(500).json({ message: 'Error adding reply', error });
-    }
-});
+//         res.status(201).json(reply);
+//     } catch (error) {
+//         res.status(500).json({ message: 'Error adding reply', error });
+//     }
+// });
 
 export default router;
