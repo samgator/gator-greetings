@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Message.css'
+import MessageReply from './MessageReply.jsx'
 
 function Message() {
     const { id } = useParams();
@@ -127,6 +128,8 @@ function Message() {
                             <img style={{width:'2vw'}} src='/src/assets/send_icon.png'/>
                         </button>
                     </div>
+                    {/*Temporary message reply example - feel free to remove*/}
+                    <MessageReply/>
                 </div>
             </div>
 

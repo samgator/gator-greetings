@@ -13,6 +13,7 @@
 
 .pic-and-name{
     display: flex;
+    align-items: center;
     flex-direction: row;
     padding: 10px;
 }
@@ -93,12 +94,21 @@
     color: #FA4616; 
 }
 
+.message-replies-container{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .message-reply-bar{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     height: auto;
+    margin: 2vh;
 }
 
 .reply-input{
