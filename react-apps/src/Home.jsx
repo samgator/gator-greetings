@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'
-import MessagePreview from './MessagePreview.jsx'
-import './Home.css'
+import { useNavigate } from 'react-router-dom';
+import MessagePreview from './MessagePreview.jsx';
+import './Home.css';
 
 function Home() {
     const navigate = useNavigate();
@@ -21,54 +21,56 @@ function Home() {
         fetchMessages();
     }, []);
 
-    function navigateProfile(){
+    function navigateProfile() {
         navigate('profile');
     }
 
-    function navigateCreateMessage(){
-        navigate('message-create')
+    function navigateCreateMessage() {
+        navigate('message-create');
     }
 
-    function navigateLogin(){
-        navigate('/')
+    function navigateLogin() {
+        navigate('/');
     }
 
-    return(
-        <div className='home-container'>
-            <div className='left-sidebar'>
-                
+    return (
+        <div className="home-container">
+            <div className="left-sidebar">
+                {/* Sidebar content */}
             </div>
-            <div className='center-content'>
-                <button className='message-btn' onClick={navigateCreateMessage}>
-                    <p className='message-btn-content'>Create a Message</p>
-                    <img className='message-btn-content' style={{width:'1vw', height:'1vw'}} src='/src/assets/edit_icon.png'/>
+            <div className="center-content">
+                <button className="message-btn" onClick={navigateCreateMessage}>
+                    <p className="message-btn-content">Create a Message</p>
+                    <img
+                        className="message-btn-content"
+                        style={{ width: '1vw', height: '1vw' }}
+                        src="/src/assets/edit_icon.png"
+                    />
                 </button>
                 <div className="messages-list">
                     {messages.map((msg) => (
-                        <MessagePreview 
-                            key={msg._id} 
-                            id={msg._id} 
-                            title={msg.title} 
+                        <MessagePreview
+                            key={msg._id}
+                            id={msg._id}
+                            title={msg.title}
                             content={msg.content}
                             image={`http://localhost:5050${msg.image}` || '/src/assets/logo.png'}
-                            author={msg.author} 
+                            author={msg.author}
                         />
                     ))}
                 </div>
             </div>
-            <div className='right-sidebar'>
-                <button className='logout-btn' onClick={navigateLogin}>
-                    <img style={{width:'3.5vw'}} src='/src/assets/logout_icon.png'/>
-                    <p className='message-btn-content'>Logout</p>
+            <div className="right-sidebar">
+                <button className="logout-btn" onClick={navigateLogin}>
+                    <img style={{ width: '3.5vw' }} src="/src/assets/logout_icon.png" />
+                    <p className="message-btn-content">Logout</p>
                 </button>
-                <button className='profile-btn' onClick={navigateProfile}>
-                    <img style={{width:'4vw'}} src='/src/assets/profile_icon.png'/>
+                <button className="profile-btn" onClick={navigateProfile}>
+                    <img style={{ width: '4vw' }} src="/src/assets/profile_icon.png" />
                     <p>Profile</p>
                 </button>
             </div>
-            
         </div>
-        
     );
 }
 

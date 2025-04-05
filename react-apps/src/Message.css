@@ -1,94 +1,92 @@
-.preview{
+.message-page {
     display: flex;
     flex-direction: column;
-    width: 60vw;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-    background-color: rgba(255, 255, 255, 0.853);
-}
-
-.preview:hover{
-    opacity: 100%;
-}
-
-.pic-and-name{
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-}
-
-.profile-pic{
-    border-radius: 100%;
-    border-style: solid;
-    width: 50px;
-    height: 50px;;
-    margin-right: 10px;
-}
-
-.profile-pic:hover{
-    cursor: pointer;
-}
-
-.preview-content{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    margin: 10px;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-.preview-title{
-    width: 75%;
-    text-align: left;
-    font-size: 40px;
-}
-
-.preview-pic{
-    width: 150px;
-    height: auto;
-}
-
-.message-container{
+.message-container {
+    background-color: #ffffffdd;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    width: 90%;
+    max-width: 800px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    width: 60vw;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
-    background-color: rgba(255, 255, 255, 0.853);
-    padding: 10px;
+    gap: 20px;
 }
 
-.message-content{
+.exit-message-btn-container {
     display: flex;
-    flex-direction: column;
-    width: 100%;
+    justify-content: flex-end;
 }
 
-.message{
-    padding: 10px;
-    padding-left: 5%;
-    text-align: left;
-    font-size: 20px;
-}
-
-.exit-message-btn-container{
-    width: 60vw;
-    text-align: right;
-    margin: 0px;
-    padding: 0px;
-}
-
-.exit-message-btn{
-    text-align: right;
+.exit-message-btn {
     background-color: transparent;
-    color: black; 
+    color: black;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 20px;
     border: none;
     cursor: pointer;
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.exit-message-btn:hover{
-    color: #FA4616; 
+.exit-message-btn:hover {
+    color: #FA4616;
+    transform: scale(1.1);
+}
+
+.pic-and-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #0021A5;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.profile-name {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.message-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.preview-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.preview-title {
+    font-size: 32px;
+    font-weight: bold;
+    flex: 1;
+    color: #0021A5;
+}
+
+.preview-pic {
+    max-width: 180px;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+
+.message {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
 }
