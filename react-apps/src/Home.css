@@ -20,14 +20,25 @@
     align-items: center;
 }
 
-.message-btn{
-    width: 15vw;
+.message-btn {
+    width: 16vw;
     background-color: #FA4616;
-    border-color: rgba(255, 255, 255, 0);
     color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5vw;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 2vh;
+}
+
+.message-btn:hover {
+    background-color: #c43d11;
+    transform: scale(1.05);
 }
 
 .message-btn-content{
@@ -35,24 +46,30 @@
     font-weight: bold;
 }
 
-.logout-btn{
+.logout-btn, .profile-btn {
     margin-top: 3vh;
     width: 6vw;
     height: 6vw;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.profile-btn{
-    margin-top: 3vh;
-    width: 6vw;
-    height: 6vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
+.logout-btn:hover, .profile-btn:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.logout-btn img, .profile-btn img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
 }
