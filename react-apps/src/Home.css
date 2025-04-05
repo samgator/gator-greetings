@@ -1,19 +1,19 @@
-.home-container{
+.home-container {
     display: flex;
 }
 
-.left-sidebar{
+.left-sidebar {
     width: 15vw;
 }
 
-.center-content{
+.center-content {
     width: 70vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.right-sidebar{
+.right-sidebar {
     width: 15vw;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
 
 .message-btn {
     width: 16vw;
-    background-color: #FA4616;
+    background-color: #fa4616;
     color: white;
     border: none;
     border-radius: 12px;
@@ -41,7 +41,7 @@
     transform: scale(1.05);
 }
 
-.message-btn-content{
+.message-btn-content {
     padding: 2px;
     font-weight: bold;
 }
@@ -72,4 +72,72 @@
     width: 60%;
     height: 60%;
     object-fit: contain;
+}
+
+.messages-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    gap: 2vw; 
+    width: 100%;
+    padding: 2vw;
+    height: 40vw;
+}
+
+.message-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2vw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 25vw; 
+    width: 16vw; 
+    max-width: 400px;
+    overflow: hidden;
+    justify-content: flex-start; 
+}
+
+.message-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profile-pic {
+    width: 3vw; 
+    height: 3vw; 
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.message-card-content {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 0.5vw;
+    line-height: 1.4;
+    height: 6vw; 
+    overflow: hidden;
+}
+
+.message-card-author {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 1vw;
+    margin-bottom: 1vw; 
+}
+
+.preview-pic {
+    width: 100%; 
+    height: auto;
+    align-self: center; 
+    margin-top: 2vw; 
+    margin-bottom: 1vw; 
+}
+
+.preview-title {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0.5vw;
 }

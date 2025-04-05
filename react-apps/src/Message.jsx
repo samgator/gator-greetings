@@ -72,25 +72,24 @@ function Message() {
     };
 
     return ( 
-        <div className='container'>
+        <div className='message-page'>
             <div className='exit-message-btn-container'>
                 <button className='exit-message-btn' onClick={exitMessage}>Back to Home</button>
             </div>
             <div className='message-container'>
                 <div className='pic-and-name'>
-                    <img className='profile-pic' src={profileImageUrl} alt="Message" onClick={displayProfile}/>
-                    <p>{author || 'Unknown'}</p>
+                    <img className='profile-pic' src={profileImageUrl} alt="Profile" onClick={displayProfile}/>
+                    <p className='profile-name'>{author || 'Unknown'}</p>
                 </div>
                 <div className='message-content'>
                     <div className='preview-content'>
                         <h1 className='preview-title'>{message.title}</h1>
-                        <img className='preview-pic' src={messageImageUrl || '/src/assets/logo.png'} alt=""/>
+                        <img className='preview-pic' src={messageImageUrl} alt="Post" />
                     </div>
                     <p className='message'>{message.content}</p>
                 </div>
             </div>
         </div>
-        
     );
 }
 
