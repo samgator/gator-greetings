@@ -116,4 +116,20 @@ router.post('/:id/replies', async (req, res) => {
     }
 });
 
+router.get('/:id/replies', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const message = await Message.findById(id).populate('replies.author', 'username');
+        if (!message) {
+            return res.status(404).json({ message: 'Message not found' });
+        }
+
+        res.status(200).json(message.replies);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching replies', error });
+    }
+});
+
+
 export default router;

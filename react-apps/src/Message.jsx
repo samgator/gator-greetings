@@ -11,6 +11,8 @@ function Message() {
     const [author, setAuthor] = useState(null);
     const [replies, setReplies] = useState([]);
     const [newReply, setNewReply] = useState('');
+    const [replyProfiles, setReplyProfiles] = useState({});
+
 
     useEffect(() => {
         async function fetchMessage() {
@@ -54,6 +56,37 @@ function Message() {
         }
     }, [message]);
 
+    const fetchReplies = async () => {
+        try {
+            const response = await fetch(`http://localhost:5050/messages/${id}/replies`);
+            if (response.ok) {
+                const data = await response.json();
+                setReplies(data);
+
+                const uniqueAuthorIds = [...new Set(data.map(r => r.author))];
+                const profiles = {};
+                
+                await Promise.all(uniqueAuthorIds.map(async (authorId) => {
+                    const res = await fetch(`http://localhost:5050/profile/${authorId._id}`);
+                    const profileData = await res.json();
+                    profiles[authorId] = profileData;
+                }));
+
+                setReplyProfiles(profiles);
+            } else {
+                console.error('Failed to fetch replies');
+            }
+        } catch (error) {
+            console.error('Error fetching replies:', error);
+        }
+    };
+    
+    useEffect(() => {
+        if (id) {
+            fetchReplies();
+        }
+    }, [id]);
+
     const profileImageUrl = profile?.profilePicture 
     ? `http://localhost:5050${profile.profilePicture}` 
     : "https://placehold.co/300";
@@ -94,6 +127,7 @@ function Message() {
                 const reply = await response.json();
                 setReplies([...replies, reply]);
                 setNewReply('');
+                fetchReplies();
             } else {
                 console.error('Failed to submit reply');
             }
@@ -101,7 +135,7 @@ function Message() {
             console.error('Error submitting reply:', error);
         }
     };
-
+    
     return ( 
         <div className='container'>
 
@@ -128,8 +162,8 @@ function Message() {
                             <img style={{width:'2vw'}} src='/src/assets/send_icon.png' onClick={handleReplySubmit}/>
                         </button>
                     </div>
-                    {/*Temporary message reply example - feel free to remove*/}
-                    <MessageReply/>
+                    {replies.map((reply, index) => (
+                    <MessageReply key={index} reply={reply} profile={replyProfiles[reply.author]} />))}
                 </div>
             </div>
 
