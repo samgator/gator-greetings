@@ -1,6 +1,6 @@
 import './MessageReply.css'
 
-function MessageReply({ reply, profile}) {
+function MessageReply({ reply, profile }) {
 
     const profileImageUrl = profile?.profilePicture 
         ? `http://localhost:5050${profile.profilePicture}` 
@@ -10,7 +10,7 @@ function MessageReply({ reply, profile}) {
         <div className='reply-container'>
             <div className='reply-pic-and-name'>
                 <img src={profileImageUrl} className='reply-profile-pic' alt="Reply Author"/>
-                <p>{reply.author?.username || 'Anonymous'}</p>
+                <p>{profile?.username || 'Anonymous'}</p>
             </div>
             <p className='reply'> {reply.content}</p>
         </div>

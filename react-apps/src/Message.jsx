@@ -65,14 +65,20 @@ function Message() {
 
                 const uniqueAuthorIds = [...new Set(data.map(r => r.author))];
                 const profiles = {};
-                
-                await Promise.all(uniqueAuthorIds.map(async (authorId) => {
-                    const res = await fetch(`http://localhost:5050/profile/${authorId._id}`);
-                    const profileData = await res.json();
-                    profiles[authorId] = profileData;
-                }));
 
+                const profilePromises = uniqueAuthorIds.map(async (authorId) => {
+                    const idToFetch = typeof authorId === 'object' && authorId !== null && authorId._id ? authorId._id : authorId;
+                    if (!idToFetch) return null; 
+
+                    const res = await fetch(`http://localhost:5050/profile/${idToFetch}`);
+                    const profileData = await res.json();
+                    profiles[idToFetch] = profileData;
+                    return profileData; 
+                });
+
+                await Promise.all(profilePromises);
                 setReplyProfiles(profiles);
+
             } else {
                 console.error('Failed to fetch replies');
             }
@@ -162,8 +168,8 @@ function Message() {
                             <img style={{width:'2vw'}} src='/src/assets/send_icon.png' onClick={handleReplySubmit}/>
                         </button>
                     </div>
-                    {replies.map((reply, index) => (
-                    <MessageReply key={index} reply={reply} profile={replyProfiles[reply.author]} />))}
+                    {replies.map((reply) => (
+                    <MessageReply key={reply._id} reply={reply} profile={replyProfiles[reply.author._id]} />))}
                 </div>
             </div>
 
