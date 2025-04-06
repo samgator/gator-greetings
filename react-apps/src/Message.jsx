@@ -75,18 +75,18 @@ function Message() {
     };
 
     const handleReplySubmit = async () => {
-        if (!newReply.trim()) return;
-    
+        if (!newReply) return;
+        
         try {
             const response = await fetch(`http://localhost:5050/messages/${id}/replies`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                // need to get user token maybe?
+            
                 body: JSON.stringify({
                     replyContent: newReply,
-                    authorId: 'currentUserId', 
+                    authorId: localStorage.getItem('userId'), 
                 }),
             });
     
@@ -123,9 +123,9 @@ function Message() {
                 </div>
                 <div className='message-replies-container'>
                     <div className='message-reply-bar'>
-                        <input type='text' className='reply-input' placeholder='Reply...'></input>
+                    <input className='reply-input' type="text" placeholder="Reply..." value={newReply} onChange={(e) => setNewReply(e.target.value)} />
                         <button className='reply-btn'>
-                            <img style={{width:'2vw'}} src='/src/assets/send_icon.png'/>
+                            <img style={{width:'2vw'}} src='/src/assets/send_icon.png' onClick={handleReplySubmit}/>
                         </button>
                     </div>
                     {/*Temporary message reply example - feel free to remove*/}

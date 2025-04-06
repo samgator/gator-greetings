@@ -91,7 +91,7 @@ router.get("/image/:filename", async (req, res) => {
 });
 
 // Post messages
-router.post('/messages/:id/replies', async (req, res) => {
+router.post('/:id/replies', async (req, res) => {
     const { id } = req.params;
     const { replyContent, authorId } = req.body;
 
