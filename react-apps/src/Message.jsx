@@ -173,7 +173,7 @@ function Message() {
                     <div className='message-reply-bar'>
                     <input className='reply-input' type="text" placeholder="Reply..." value={newReply} onChange={(e) => setNewReply(e.target.value)} />
                         <button className='reply-btn'>
-                            <img style={{width:'2vw'}} src='/src/assets/send_icon.png' onClick={handleReplySubmit}/>
+                            <img style={{width:'80%', height:'80%', marginTop:'4px', marginLeft:'4px'}} src="/src/assets/send_icon.png" onClick={handleReplySubmit}/>
                         </button>
                     </div>
                     {replies.map((reply) => (
