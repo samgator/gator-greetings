@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Message.css'
 
-function MessagePreview({title, content, image, id, author}) {
+function MessagePreview({title, content, image, id, author, timestamp}) {
     const [profile, setProfile] = useState(null);
     const [username, setUsername] = useState(null);
     const navigate = useNavigate();
@@ -38,7 +38,12 @@ function MessagePreview({title, content, image, id, author}) {
     const profileImageUrl = profile?.profilePicture 
     ? `http://localhost:5050${profile.profilePicture}` 
     : "https://placehold.co/300";
-    
+
+    // Timestamps
+    function formatDate(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleString();
+    }
 
     return (
         <button className='preview' onClick={displayMessage}>
@@ -49,6 +54,7 @@ function MessagePreview({title, content, image, id, author}) {
             <div className='preview-content'>
                 <h1 className='preview-title'>{title}</h1>
                 <img className='preview-pic' src={image} alt="" />
+                <p className='timestamp'>{formatDate(timestamp)}</p>
             </div>
         </button>
     );

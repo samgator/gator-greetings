@@ -141,6 +141,13 @@ function Message() {
             console.error('Error submitting reply:', error);
         }
     };
+
+    // Timestamps
+    function formatDate(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleString();
+    }
+    
     
     return ( 
         <div className='container'>
@@ -158,6 +165,7 @@ function Message() {
                     <div className='preview-content'>
                         <h1 className='preview-title'>{message.title}</h1>
                         <img className='preview-pic' src={messageImageUrl || '/src/assets/logo.png'} alt=""/>
+                        <p className='timestamp'>{formatDate(message.createdAt)}</p>
                     </div>
                     <p className='message'>{message.content}</p>
                 </div>
