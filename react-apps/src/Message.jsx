@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Message.css'
+import MessageReply from './MessageReply.jsx'
 
 function Message() {
     const { id } = useParams();
@@ -8,6 +9,10 @@ function Message() {
     const [message, setMessage] = useState(null);
     const [profile, setProfile] = useState(null);
     const [author, setAuthor] = useState(null);
+    const [replies, setReplies] = useState([]);
+    const [newReply, setNewReply] = useState('');
+    const [replyProfiles, setReplyProfiles] = useState({});
+
 
     useEffect(() => {
         async function fetchMessage() {
@@ -51,6 +56,43 @@ function Message() {
         }
     }, [message]);
 
+    const fetchReplies = async () => {
+        try {
+            const response = await fetch(`http://localhost:5050/messages/${id}/replies`);
+            if (response.ok) {
+                const data = await response.json();
+                setReplies(data);
+
+                const uniqueAuthorIds = [...new Set(data.map(r => r.author))];
+                const profiles = {};
+
+                const profilePromises = uniqueAuthorIds.map(async (authorId) => {
+                    const idToFetch = typeof authorId === 'object' && authorId !== null && authorId._id ? authorId._id : authorId;
+                    if (!idToFetch) return null; 
+
+                    const res = await fetch(`http://localhost:5050/profile/${idToFetch}`);
+                    const profileData = await res.json();
+                    profiles[idToFetch] = profileData;
+                    return profileData; 
+                });
+
+                await Promise.all(profilePromises);
+                setReplyProfiles(profiles);
+
+            } else {
+                console.error('Failed to fetch replies');
+            }
+        } catch (error) {
+            console.error('Error fetching replies:', error);
+        }
+    };
+    
+    useEffect(() => {
+        if (id) {
+            fetchReplies();
+        }
+    }, [id]);
+
     const profileImageUrl = profile?.profilePicture 
     ? `http://localhost:5050${profile.profilePicture}` 
     : "https://placehold.co/300";
@@ -71,25 +113,76 @@ function Message() {
         navigate(`/home/profileview/${message.author?._id}`);
     };
 
+    const handleReplySubmit = async () => {
+        if (!newReply) return;
+        
+        try {
+            const response = await fetch(`http://localhost:5050/messages/${id}/replies`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            
+                body: JSON.stringify({
+                    replyContent: newReply,
+                    authorId: localStorage.getItem('userId'), 
+                }),
+            });
+    
+            if (response.ok) {
+                const reply = await response.json();
+                setReplies([...replies, reply]);
+                setNewReply('');
+                fetchReplies();
+            } else {
+                console.error('Failed to submit reply');
+            }
+        } catch (error) {
+            console.error('Error submitting reply:', error);
+        }
+    };
+
+    // Timestamps
+    function formatDate(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleString();
+    }
+    
+    
     return ( 
-        <div className='message-page'>
+        <div className='container'>
+
             <div className='exit-message-btn-container'>
                 <button className='exit-message-btn' onClick={exitMessage}>Back to Home</button>
             </div>
+
             <div className='message-container'>
                 <div className='pic-and-name'>
-                    <img className='profile-pic' src={profileImageUrl} alt="Profile" onClick={displayProfile}/>
-                    <p className='profile-name'>{author || 'Unknown'}</p>
+                    <img className='profile-pic' src={profileImageUrl} alt="Message" onClick={displayProfile}/>
+                    <p>{author || 'Unknown'}</p>
                 </div>
                 <div className='message-content'>
                     <div className='preview-content'>
                         <h1 className='preview-title'>{message.title}</h1>
-                        <img className='preview-pic' src={messageImageUrl} alt="Post" />
+                        <img className='preview-pic' src={messageImageUrl || '/src/assets/logo.png'} alt=""/>
+                        <p className='timestamp'>{formatDate(message.createdAt)}</p>
                     </div>
                     <p className='message'>{message.content}</p>
                 </div>
+                <div className='message-replies-container'>
+                    <div className='message-reply-bar'>
+                    <input className='reply-input' type="text" placeholder="Reply..." value={newReply} onChange={(e) => setNewReply(e.target.value)} />
+                        <button className='reply-btn'>
+                            <img style={{width:'2vw'}} src='/src/assets/send_icon.png' onClick={handleReplySubmit}/>
+                        </button>
+                    </div>
+                    {replies.map((reply) => (
+                    <MessageReply key={reply._id} reply={reply} profile={replyProfiles[reply.author._id]} />))}
+                </div>
             </div>
+
         </div>
+        
     );
 }
 

@@ -1,0 +1,25 @@
+.reply-container{
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.853);
+    padding: 10px;
+}
+
+.reply-pic-and-name{
+    display: flex;
+    align-items: center;
+}
+
+.reply-profile-pic{
+    width: 1.5vw;
+    border-radius: 100%;
+    border: 2px solid black;
+    margin: 0.5vw;
+}
+
+.reply{
+    margin-left: 0.5vw;
+}
