@@ -55,8 +55,7 @@ function Home() {
                             title={msg.title}
                             content={msg.content}
                             image={`http://localhost:5050${msg.image}` || '/src/assets/logo.png'}
-                            author={msg.author} 
-                            timestamp={msg.createdAt}  
+                            author={msg.author}
                         />
                     ))}
                 </div>
