@@ -9,7 +9,7 @@
     "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^5.9.1",
-    "mongoose": "^8.13.2",
+    "mongoose": "^8.13.0",
     "multer": "^1.4.4",
     "multer-gridfs-storage": "^5.0.2",
     "passport": "^0.7.0",
