@@ -81,7 +81,8 @@ function Home() {
                             content={msg.content}
                             image={`http://localhost:5050${msg.image}` || '/src/assets/logo.png'}
                             author={msg.author} 
-                            timestamp={msg.createdAt}  
+                            timestamp={msg.createdAt} 
+                            likes={0} //Replace with likes from DB
                         />
                     ))}
                 </div>
