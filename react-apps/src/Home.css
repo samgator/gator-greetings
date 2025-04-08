@@ -4,6 +4,9 @@
 
 .left-sidebar {
     width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .center-content {
@@ -21,13 +24,15 @@
 }
 
 .message-btn {
-    width: 16vw;
+    margin-top: 3vh;
+    width: 6vw;
+    height: 6vw;
     background-color: #fa4616;
     color: white;
     border: none;
-    border-radius: 12px;
-    padding: 10px 14px;
+    border-radius: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.5vw;
@@ -46,7 +51,7 @@
     font-weight: bold;
 }
 
-.logout-btn, .profile-btn {
+.logout-btn, .profile-btn{
     margin-top: 3vh;
     width: 6vw;
     height: 6vw;
@@ -63,7 +68,7 @@
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.logout-btn:hover, .profile-btn:hover {
+.logout-btn:hover, .profile-btn:hover{
     background-color: #f0f0f0;
     transform: scale(1.05);
 }

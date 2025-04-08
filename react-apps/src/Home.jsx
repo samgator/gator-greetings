@@ -36,17 +36,16 @@ function Home() {
     return (
         <div className="home-container">
             <div className="left-sidebar">
-                {/* Sidebar content */}
-            </div>
-            <div className="center-content">
                 <button className="message-btn" onClick={navigateCreateMessage}>
-                    <p className="message-btn-content">Create a Message</p>
                     <img
                         className="message-btn-content"
-                        style={{ width: '1vw', height: '1vw' }}
+                        style={{ width: '2vw', height: '2vw' }}
                         src="/src/assets/edit_icon.png"
                     />
+                    <p className="message-btn-content">Message</p>
                 </button>
+            </div>
+            <div className="center-content">
                 <div className="messages-list">
                     {messages.map((msg) => (
                         <MessagePreview
