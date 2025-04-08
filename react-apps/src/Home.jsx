@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
 import MessagePreview from './MessagePreview.jsx';
 import './Home.css';
 
@@ -33,20 +34,44 @@ function Home() {
         navigate('/');
     }
 
+    {/*Dropdown menu useState*/}
+    const [isOpen, setIsOpen] = useState(false);
+    
+    const handleToggle = () => {
+        setIsOpen(!isOpen);
+    }
+
     return (
         <div className="home-container">
             <div className="left-sidebar">
-                {/* Sidebar content */}
-            </div>
-            <div className="center-content">
                 <button className="message-btn" onClick={navigateCreateMessage}>
-                    <p className="message-btn-content">Create a Message</p>
                     <img
                         className="message-btn-content"
-                        style={{ width: '1vw', height: '1vw' }}
+                        style={{ width: '2vw', height: '2vw' }}
                         src="/src/assets/edit_icon.png"
                     />
+                    <p className="message-btn-content">Message</p>
                 </button>
+                <Dropdown onToggle={handleToggle}>
+                    <Dropdown.Toggle className="topics-dropdown">
+                        Explore Topics
+                    </Dropdown.Toggle>
+
+                    {isOpen && (
+                        <Dropdown.Menu className="topics-dropdown-content">
+                            <Dropdown.Item className="topic-item" href='#/'>Academics</Dropdown.Item>
+                            <Dropdown.Item className="topic-item" href='#/'>Clubs</Dropdown.Item>
+                            <Dropdown.Item className="topic-item" href='#/'>Extracurriculars</Dropdown.Item>
+                            <Dropdown.Item className="topic-item" href='#/'>Housing</Dropdown.Item>
+                            <Dropdown.Item className="topic-item" href='#/'>Meal Plan</Dropdown.Item>
+                            <Dropdown.Item className="topic-item" href='#/'>Social Events</Dropdown.Item>
+                            <Dropdown.Item className="topic-item" href='#/'>Sports</Dropdown.Item>
+                            <Dropdown.Item className="topic-item" href='#/'>Other</Dropdown.Item>
+                        </Dropdown.Menu>
+                    )}
+                </Dropdown>
+            </div>
+            <div className="center-content">
                 <div className="messages-list">
                     {messages.map((msg) => (
                         <MessagePreview
@@ -56,7 +81,8 @@ function Home() {
                             content={msg.content}
                             image={`http://localhost:5050${msg.image}` || '/src/assets/logo.png'}
                             author={msg.author} 
-                            timestamp={msg.createdAt}  
+                            timestamp={msg.createdAt} 
+                            likes={0} //Replace with likes from DB
                         />
                     ))}
                 </div>

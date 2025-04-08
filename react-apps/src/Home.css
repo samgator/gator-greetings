@@ -4,6 +4,11 @@
 
 .left-sidebar {
     width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: static;
+    z-index: 0;
 }
 
 .center-content {
@@ -20,20 +25,23 @@
     align-items: center;
 }
 
-.message-btn {
-    width: 16vw;
+.message-btn, .topics-dropdown {
+    margin-top: 3vh;
+    width: 6vw;
+    height: 6vw;
     background-color: #fa4616;
     color: white;
     border: none;
-    border-radius: 12px;
-    padding: 10px 14px;
+    border-radius: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.5vw;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     margin-bottom: 2vh;
+    font-weight: bold;
 }
 
 .message-btn:hover {
@@ -42,8 +50,32 @@
 }
 
 .message-btn-content {
-    padding: 2px;
     font-weight: bold;
+}
+
+.topics-dropdown:hover {
+    opacity: 100%;
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+.topics-dropdown-content {
+    width: 6vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0021A5;;
+    padding-top: 3vw;
+    margin-top: -3vw;
+    margin-left: 0.15vw;
+    z-index: -1;
+}
+
+.topic-item {
+    margin: 0.05vw;
+    color: white;
+    font-size: 0.8vw;
 }
 
 .logout-btn, .profile-btn {
@@ -63,7 +95,7 @@
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.logout-btn:hover, .profile-btn:hover {
+.logout-btn:hover, .profile-btn:hover{
     background-color: #f0f0f0;
     transform: scale(1.05);
 }

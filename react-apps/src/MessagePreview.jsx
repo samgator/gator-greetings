@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Message.css'
 
-function MessagePreview({title, content, image, id, author, timestamp}) {
+function MessagePreview({title, content, image, id, author, timestamp, likes}) {
     const [profile, setProfile] = useState(null);
     const [username, setUsername] = useState(null);
     const navigate = useNavigate();
@@ -45,6 +45,12 @@ function MessagePreview({title, content, image, id, author, timestamp}) {
         return date.toLocaleString();
     }
 
+    // Likes
+    const likeHandler = (e) => {
+        // Add a function here to increment/decrement likes
+        e.stopPropagation();
+    };
+
     return (
         <button className='preview' onClick={displayMessage}>
             <div className='pic-and-name'>
@@ -54,7 +60,11 @@ function MessagePreview({title, content, image, id, author, timestamp}) {
             <div className='preview-content'>
                 <h1 className='preview-title'>{title}</h1>
                 <img className='preview-pic' src={image} alt="" />
-                <p className='timestamp'>{formatDate(timestamp)}</p>
+                <div className='timestamp-and-likes'>
+                    <p className='timestamp'>{formatDate(timestamp)}</p>
+                    <button className='like-btn' onClick={likeHandler}>{likes} ♥</button>
+                </div>
+                
             </div>
         </button>
     );

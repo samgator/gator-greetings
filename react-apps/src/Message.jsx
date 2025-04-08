@@ -148,6 +148,10 @@ function Message() {
         return date.toLocaleString();
     }
     
+    // Likes
+    function likeHandler(){
+        //Function to increment/decrement likes
+    };
     
     return ( 
         <div className='container'>
@@ -165,9 +169,13 @@ function Message() {
                     <div className='preview-content'>
                         <h1 className='preview-title'>{message.title}</h1>
                         <img className='preview-pic' src={messageImageUrl || '/src/assets/logo.png'} alt=""/>
-                        <p className='timestamp'>{formatDate(message.createdAt)}</p>
                     </div>
                     <p className='message'>{message.content}</p>
+                    <div className='timestamp-and-likes'>
+                        <p className='timestamp'>{formatDate(message.createdAt)}</p>
+                        <button className='like-btn' onClick={likeHandler}>0 ♥</button> {/*Replace 0 with likes from DB*/}
+                    </div>
+                    
                 </div>
                 <div className='message-replies-container'>
                     <div className='message-reply-bar'>
