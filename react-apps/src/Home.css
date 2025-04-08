@@ -68,6 +68,7 @@
     background-color: blue;
     padding-top: 3vw;
     margin-top: -3vw;
+    margin-left: 0.15vw;
     z-index: -1;
 }
 
