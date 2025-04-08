@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Dropdown from 'react-bootstrap/Dropdown';
 import MessagePreview from './MessagePreview.jsx';
 import './Home.css';
 
@@ -33,6 +34,18 @@ function Home() {
         navigate('/');
     }
 
+    {/*Dropdown menu useState*/}
+    const [isOpen, setIsOpen] = useState(false);
+    
+    const handleToggle = (newValue) => {
+        if(newValue == true){
+            setIsOpen(true);
+        }
+        else{
+            setIsOpen(false);
+        }
+    }
+
     return (
         <div className="home-container">
             <div className="left-sidebar">
@@ -44,6 +57,22 @@ function Home() {
                     />
                     <p className="message-btn-content">Message</p>
                 </button>
+                <Dropdown show={isOpen} onToggle={handleToggle}>
+                    <Dropdown.Toggle className="topics-dropdown">
+                        Explore Topics
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu className="topics-dropdown-content">
+                        <Dropdown.Item className="topic-item" href='#/'>Academics</Dropdown.Item>
+                        <Dropdown.Item className="topic-item" href='#/'>Clubs</Dropdown.Item>
+                        <Dropdown.Item className="topic-item" href='#/'>Extracurriculars</Dropdown.Item>
+                        <Dropdown.Item className="topic-item" href='#/'>Housing</Dropdown.Item>
+                        <Dropdown.Item className="topic-item" href='#/'>Meal Plan</Dropdown.Item>
+                        <Dropdown.Item className="topic-item" href='#/'>Social Events</Dropdown.Item>
+                        <Dropdown.Item className="topic-item" href='#/'>Sports</Dropdown.Item>
+                        <Dropdown.Item className="topic-item" href='#/'>Other</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
             <div className="center-content">
                 <div className="messages-list">
