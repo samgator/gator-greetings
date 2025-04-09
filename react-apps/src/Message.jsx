@@ -23,6 +23,8 @@ function Message() {
                 const data = await response.json();
                 console.log('Fetched message:', data); // Debugging log
                 setMessage(data);
+                setLikes(data.likes);
+                setLikedBy(data.likedBy.includes(localStorage.getItem('userId')));
             } catch (error) {
                 console.error('Error fetching message:', error);
             }
