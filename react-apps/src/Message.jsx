@@ -13,7 +13,7 @@ function Message() {
     const [newReply, setNewReply] = useState('');
     const [replyProfiles, setReplyProfiles] = useState({});
     const [likes, setLikes] = useState(0);
-    const [liked, setLiked] = useState(false);
+    const [likedBy, setLikedBy] = useState(false);
 
 
     useEffect(() => {
@@ -21,6 +21,7 @@ function Message() {
             try {
                 const response = await fetch(`http://localhost:5050/messages/${id}`);
                 const data = await response.json();
+                console.log('Fetched message:', data); // Debugging log
                 setMessage(data);
             } catch (error) {
                 console.error('Error fetching message:', error);
@@ -151,8 +152,29 @@ function Message() {
     }
     
     // Likes
-    function likeHandler(){
-        //Function to increment/decrement likes
+    function likeHandler() {
+        const userId = localStorage.getItem('userId'); // Assuming userId is stored in localStorage
+
+        if (!userId) {
+            console.error('User not logged in');
+            return;
+        }
+
+        fetch(`http://localhost:5050/messages/${message._id}/likes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId }),
+        })
+            .then((response) => response.json())
+            .then((updatedMessage) => {
+                setLikes(updatedMessage.likes);
+                setLikedBy(updatedMessage.likedBy.includes(userId));
+            })
+            .catch((error) => {
+                console.error('Error updating like:', error);
+            });
     };
     
     return ( 
@@ -175,7 +197,7 @@ function Message() {
                     <p className='message'>{message.content}</p>
                     <div className='timestamp-and-likes'>
                         <p className='timestamp'>{formatDate(message.createdAt)}</p>
-                        <button className='like-btn' onClick={likeHandler}>0 ♥</button> {/*Replace 0 with likes from DB*/}
+                        <button className='like-btn' onClick={likeHandler}>{likes} ♥</button>
                     </div>
                     
                 </div>

@@ -135,7 +135,7 @@ router.get('/:id/replies', async (req, res) => {
 export default router;
 
 // Like a message
-router.post('/:id/like', async (req, res) => {
+router.post('/:id/likes', async (req, res) => {
     try {
         const { userId } = req.body;
         const message = await Message.findById(req.params.id);
