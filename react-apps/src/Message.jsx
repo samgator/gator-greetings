@@ -12,6 +12,8 @@ function Message() {
     const [replies, setReplies] = useState([]);
     const [newReply, setNewReply] = useState('');
     const [replyProfiles, setReplyProfiles] = useState({});
+    const [likes, setLikes] = useState(0);
+    const [liked, setLiked] = useState(false);
 
 
     useEffect(() => {

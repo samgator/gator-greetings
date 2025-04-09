@@ -133,3 +133,33 @@ router.get('/:id/replies', async (req, res) => {
 
 
 export default router;
+
+// Like a message
+router.post('/:id/like', async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const message = await Message.findById(req.params.id);
+
+        if (!message) {
+            return res.status(404).json({ message: 'Message not found' });
+        }
+
+        const hasLiked = message.likedBy.includes(userId);
+
+        if (hasLiked) {
+            // Unlike
+            message.likes -= 1;
+            message.likedBy = message.likedBy.filter(id => id.toString() !== userId);
+        } else {
+            // Like
+            message.likes += 1;
+            message.likedBy.push(userId);
+        }
+
+        await message.save();
+        res.json(message);
+    } catch (error) {
+        console.error('Error updating like:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
