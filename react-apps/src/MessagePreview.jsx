@@ -84,11 +84,8 @@ function MessagePreview({title, content, image, id, author, timestamp, likes}) {
             <div className='preview-content'>
                 <h1 className='preview-title'>{title}</h1>
                 <img className='preview-pic' src={image} alt="" />
-                <div className='timestamp-and-likes'>
-                    <p className='timestamp'>{formatDate(timestamp)}</p>
-                    <button className='like-btn' onClick={likeHandler}>{likesCount} ♥</button>
-                </div>
-                
+                <p className='timestamp'>{formatDate(timestamp)}</p>
+                <button className='like-btn' onClick={likeHandler}>{likesCount} ♥</button>
             </div>
         </button>
     );

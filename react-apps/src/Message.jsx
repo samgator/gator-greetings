@@ -181,7 +181,6 @@ function Message() {
     
     return ( 
         <div className='container'>
-
             <div className='exit-message-btn-container'>
                 <button className='exit-message-btn' onClick={exitMessage}>Back to Home</button>
             </div>
@@ -201,9 +200,9 @@ function Message() {
                         <p className='timestamp'>{formatDate(message.createdAt)}</p>
                         <button className='like-btn' onClick={likeHandler}>{likes} ♥</button>
                     </div>
-                    
                 </div>
-                <div className='message-replies-container'>
+            </div>
+            <div className='message-replies-container'>
                     <div className='message-reply-bar'>
                     <input className='reply-input' type="text" placeholder="Reply..." value={newReply} onChange={(e) => setNewReply(e.target.value)} />
                         <button className='reply-btn'>
@@ -212,9 +211,7 @@ function Message() {
                     </div>
                     {replies.map((reply) => (
                     <MessageReply key={reply._id} reply={reply} profile={replyProfiles[reply.author._id]} />))}
-                </div>
             </div>
-
         </div>
         
     );
