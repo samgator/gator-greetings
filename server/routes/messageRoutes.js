@@ -8,11 +8,11 @@ const router = express.Router();
 // Post a message
 router.post('/post', upload.single("image"), async (req, res) => {
     try {
-        const { author, title, content } = req.body;
+        const { author, title, content, topic } = req.body;
 
         let image = req.file ? `/messages/image/${req.file.filename}` : undefined;
 
-        const newMessage = new Message({ author, title, content, image: image || " " });
+        const newMessage = new Message({ author, title, content, image: image || " ", topic });
         await newMessage.save();
 
         res.status(201).json(newMessage);

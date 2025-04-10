@@ -7,6 +7,7 @@ function MessageCreate() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [image, setImage] = useState('');
+    const [topic, setTopic] = useState('Academics');
 
     function exitMessage(){
         navigate(-1);
@@ -24,6 +25,7 @@ function MessageCreate() {
         formData.append("author", userId);
         formData.append("title", title);
         formData.append("content", content);
+        formData.append("topic", topic);
 
         if (image) {
             formData.append("image", image);
@@ -51,6 +53,17 @@ function MessageCreate() {
         }
     }
 
+    const topics = [
+        'Academics',
+        'Clubs',
+        'Extracurriculars',
+        'Housing',
+        'Meal Plan',
+        'Social Events',
+        'Sports',
+        'Other'
+    ];
+
     return (
         <div className="container">
             <div className='exit-message-create-btn-container'>
@@ -65,6 +78,18 @@ function MessageCreate() {
                 <div className='title-and-input'>
                     <p>Enter your Message</p>
                     <textarea className='input-field' placeholder="Message" value={content} onChange={(e) => setContent(e.target.value)} />
+                </div>
+                <div className='title-and-input'>
+                    <p>Select a Topic</p>
+                    <select
+                        className='input-field'
+                        value={topic}
+                        onChange={(e) => setTopic(e.target.value)}
+                    >
+                        {topics.map(t => (
+                            <option key={t} value={t}>{t}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className='title-and-input'>
                     <p>Add an image</p>

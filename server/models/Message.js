@@ -14,7 +14,7 @@ const messageSchema = new mongoose.Schema({
     replies: {type: [replySchema], default: []},
     likes: { type: Number, default: 0 },
     likedBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User', default: [] },
-    topics: { type: [String], default: []}
+    topic: { type: String, default: ""}
 }, {
     timestamps: true
 });
