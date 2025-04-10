@@ -13,7 +13,8 @@ const messageSchema = new mongoose.Schema({
     image: { type: String, default: "" },
     replies: {type: [replySchema], default: []},
     likes: { type: Number, default: 0 },
-    likedBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User', default: [] }
+    likedBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User', default: [] },
+    topics: { type: [String], default: []}
 }, {
     timestamps: true
 });
