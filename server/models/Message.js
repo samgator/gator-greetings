@@ -11,7 +11,10 @@ const messageSchema = new mongoose.Schema({
     title: {type: String, required: true },
     content: { type: String, required: true },
     image: { type: String, default: "" },
-    replies: {type: [replySchema], default: []}
+    replies: {type: [replySchema], default: []},
+    likes: { type: Number, default: 0 },
+    likedBy: { type: [mongoose.Schema.Types.ObjectId], ref: 'User', default: [] },
+    topic: { type: String, default: ""}
 }, {
     timestamps: true
 });

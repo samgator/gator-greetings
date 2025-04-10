@@ -1,7 +1,9 @@
 import multer from "multer";
-import { GridFsStorage } from "multer-gridfs-storage";
 import dotenv from "dotenv";
 dotenv.config();
+
+import pkg from 'multer-gridfs-storage';
+const { GridFsStorage } = pkg;
 
 const storage = new GridFsStorage({
   url: process.env.ATLAS_URI,

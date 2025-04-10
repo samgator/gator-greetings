@@ -8,11 +8,11 @@ const router = express.Router();
 // Post a message
 router.post('/post', upload.single("image"), async (req, res) => {
     try {
-        const { author, title, content } = req.body;
+        const { author, title, content, topic } = req.body;
 
         let image = req.file ? `/messages/image/${req.file.filename}` : undefined;
 
-        const newMessage = new Message({ author, title, content, image: image || " " });
+        const newMessage = new Message({ author, title, content, image: image || " ", topic });
         await newMessage.save();
 
         res.status(201).json(newMessage);
@@ -133,3 +133,33 @@ router.get('/:id/replies', async (req, res) => {
 
 
 export default router;
+
+// Like a message
+router.post('/:id/likes', async (req, res) => {
+    try {
+        const { userId } = req.body;
+        const message = await Message.findById(req.params.id);
+
+        if (!message) {
+            return res.status(404).json({ message: 'Message not found' });
+        }
+
+        const hasLiked = message.likedBy.includes(userId);
+
+        if (hasLiked) {
+            // Unlike
+            message.likes -= 1;
+            message.likedBy = message.likedBy.filter(id => id.toString() !== userId);
+        } else {
+            // Like
+            message.likes += 1;
+            message.likedBy.push(userId);
+        }
+
+        await message.save();
+        res.json(message);
+    } catch (error) {
+        console.error('Error updating like:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});

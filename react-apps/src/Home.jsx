@@ -7,6 +7,7 @@ import './Home.css';
 function Home() {
     const navigate = useNavigate();
     const [messages, setMessages] = useState([]);
+    const [selectedTopic, setSelectedTopic] = useState('All Topics');
 
     // Fetch messages from the backend
     useEffect(() => {
@@ -41,6 +42,15 @@ function Home() {
         setIsOpen(!isOpen);
     }
 
+    const handleSelectTopic = (topic) => {
+        setSelectedTopic(topic);
+        setIsOpen(false);
+    }
+
+    const topics = [ 'Choose A Topic','All Topics','Academics','Clubs','Extracurriculars','Housing','Meal Plan','Social Events','Sports','Other' ];
+
+    const filteredMessages = selectedTopic === 'All Topics'? messages : messages.filter((msg) => msg.topic === selectedTopic);
+
     return (
         <div className="home-container">
             <div className="left-sidebar">
@@ -52,28 +62,24 @@ function Home() {
                     />
                     <p className="message-btn-content">Message</p>
                 </button>
+
                 <Dropdown onToggle={handleToggle}>
                     <Dropdown.Toggle className="topics-dropdown">
-                        Explore Topics
+                        {selectedTopic}
                     </Dropdown.Toggle>
-
                     {isOpen && (
-                        <Dropdown.Menu className="topics-dropdown-content">
-                            <Dropdown.Item className="topic-item" href='#/'>Academics</Dropdown.Item>
-                            <Dropdown.Item className="topic-item" href='#/'>Clubs</Dropdown.Item>
-                            <Dropdown.Item className="topic-item" href='#/'>Extracurriculars</Dropdown.Item>
-                            <Dropdown.Item className="topic-item" href='#/'>Housing</Dropdown.Item>
-                            <Dropdown.Item className="topic-item" href='#/'>Meal Plan</Dropdown.Item>
-                            <Dropdown.Item className="topic-item" href='#/'>Social Events</Dropdown.Item>
-                            <Dropdown.Item className="topic-item" href='#/'>Sports</Dropdown.Item>
-                            <Dropdown.Item className="topic-item" href='#/'>Other</Dropdown.Item>
-                        </Dropdown.Menu>
+                        <Dropdown.Menu className="topics-dropdown-content" show={isOpen}>
+                        {topics.map((topic) => (
+                            <Dropdown.Item key={topic} className="topic-item" onClick={() => handleSelectTopic(topic)}> {topic} </Dropdown.Item>
+                        ))}
+                    </Dropdown.Menu>
                     )}
+                    
                 </Dropdown>
             </div>
             <div className="center-content">
                 <div className="messages-list">
-                    {messages.map((msg) => (
+                    {filteredMessages.map((msg) => (
                         <MessagePreview
                             key={msg._id}
                             id={msg._id}
@@ -82,7 +88,7 @@ function Home() {
                             image={`http://localhost:5050${msg.image}` || '/src/assets/logo.png'}
                             author={msg.author} 
                             timestamp={msg.createdAt} 
-                            likes={0} //Replace with likes from DB
+                            likes={msg.likes}
                         />
                     ))}
                 </div>
