@@ -115,7 +115,7 @@ function Message() {
     }
 
     const displayProfile = () => {
-        navigate(`/home/profileview/${message.author?._id}`);
+        navigate(`/home/profileview/${id}`);
     };
 
     const handleReplySubmit = async () => {
@@ -162,7 +162,7 @@ function Message() {
             return;
         }
 
-        fetch(`http://localhost:5050/messages/${message._id}/likes`, {
+        fetch(`http://localhost:5050/messages/${id}/likes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

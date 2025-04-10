@@ -3,13 +3,35 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 function ProfileView() {
-    const {userId} = useParams();
+    const {id} = useParams();
     const navigate = useNavigate();
+    const [message, setMessage] = useState(null);
     const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        async function fetchProfile() {
+        async function fetchMessage() {
             try {
+                const response = await fetch(`http://localhost:5050/messages/${id}`);
+                const data = await response.json();
+                console.log('Fetched message:', data); // Debugging log
+                setMessage(data);
+            } catch (error) {
+                console.error('Error fetching message:', error);
+            }
+        }
+
+        fetchMessage();
+    }, [id]);
+
+    useEffect(() => {
+        async function fetchProfile(userId) {
+            try {
+                
+                if (!userId) {
+                    console.error("No user ID found");
+                    return;
+                }
+    
                 const response = await fetch(`http://localhost:5050/profile/${userId}`);
                 const data = await response.json();
                 
@@ -22,8 +44,11 @@ function ProfileView() {
                 console.error("Error fetching profile:", error);
             }
         }
-        fetchProfile();
-    }, [userId]);
+
+        if (message && message.author) {
+            fetchProfile(message.author._id);
+        }
+    }, [message]);
 
     function exitProfile() {
         navigate(-1);
@@ -33,7 +58,6 @@ function ProfileView() {
     const profileImageUrl = profile?.profilePicture 
     ? `http://localhost:5050${profile.profilePicture}` 
     : "https://placehold.co/300";
-
 
     return (
         <div className="profile-container">

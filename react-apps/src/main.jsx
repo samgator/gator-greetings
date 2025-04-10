@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')).render(
               <Route path='message-create' element={<MessageCreate />} />
               <Route path='profile' element={<Profile />} />
               <Route path='profile/edit' element={<ProfileEdit />} />
-              <Route path="profileview/:userId" element={<ProfileView />} />
+              <Route path="profileview/:id" element={<ProfileView />} />
           </Route>
       </Routes>
   </BrowserRouter>
