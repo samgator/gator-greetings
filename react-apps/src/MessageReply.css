@@ -2,10 +2,12 @@
     display: flex;
     flex-direction: column;
     width: 40vw;
+    height: 6vw;
     border-radius: 5px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
     background-color: rgba(255, 255, 255, 0.853);
     padding: 10px;
+    position: relative;
 }
 
 .reply-pic-and-name{

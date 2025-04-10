@@ -142,6 +142,7 @@
     max-width: 400px;
     overflow: hidden;
     justify-content: flex-start;
+    position: relative;
 }
 
 .preview:hover {
@@ -185,4 +186,29 @@
     font-weight: bold;
     text-align: center;
     margin-top: 1vw;
+}
+
+.like-btn {
+    position: absolute;
+    bottom: 1vw;
+    right: 1vw;
+    border-radius: 50%;
+    width: 2.5vw;
+    height: 2.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fa4616;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.timestamp {
+    position: absolute;
+    bottom: .5vw;
+    left: .7vw;
+    font-size: 0.75rem;
+    color: #888;
+    margin: 0;
 }
