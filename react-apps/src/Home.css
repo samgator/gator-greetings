@@ -65,7 +65,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #0021A5;;
+    justify-content: center;
+    background-color: #0655d4;  
     padding-top: 3vw;
     margin-top: -3vw;
     margin-left: 0.15vw;
@@ -73,10 +74,22 @@
 }
 
 .topic-item {
-    margin: 0.05vw;
+    padding: 0.5vw 1vw;
     color: white;
     font-size: 0.8vw;
-}
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .topic-item:hover, .topic-item:focus {
+    background-color: #0033cc;
+    color: #fff;
+  }
 
 .logout-btn, .profile-btn {
     margin-top: 3vh;
