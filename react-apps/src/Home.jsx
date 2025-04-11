@@ -15,7 +15,7 @@ function Home() {
             try {
                 const response = await fetch('http://localhost:5050/messages/fetch');
                 const data = await response.json();
-                setMessages(data);
+                setMessages(data.reverse());
             } catch (error) {
                 console.error('Error fetching messages:', error);
             }
