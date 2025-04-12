@@ -47,33 +47,35 @@ function ProfileEdit({ user, setUser }) {
 
     return (
         <div className="profile-edit-container">
-            <h1>Edit Profile</h1>
-            <div className="edit-form">
-                <label>Username:</label>
-                <input 
-                    type="text" 
-                    value={username} 
-                    onChange={(e) => setUsername(e.target.value)} 
-                    placeholder="Enter new username"
-                />
-
-                <label>Bio:</label>
-                <textarea 
-                    value={bio} 
-                    onChange={(e) => setBio(e.target.value)} 
-                    placeholder="Write something about yourself"
-                ></textarea>
-
-                <label>Profile Image Upload:</label>
-                <input 
-                type="file" 
-                accept="image/*" 
-                onChange={(e) => setProfilePicture(e.target.files[0])} 
-                />
-
-                <div className="button-group">
-                    <button onClick={handleSave} className="save-btn">Save</button>
-                    <button onClick={() => navigate("/home/profile")} className="cancel-btn">Go Back</button>
+            <div className="edit-card">
+                <h1>Edit Profile</h1>
+                <div className="edit-form">
+                    <label>Username:</label>
+                    <input 
+                        type="text" 
+                        value={username} 
+                        onChange={(e) => setUsername(e.target.value)} 
+                        placeholder="Enter new username"
+                    />
+    
+                    <label>Bio:</label>
+                    <textarea 
+                        value={bio} 
+                        onChange={(e) => setBio(e.target.value)} 
+                        placeholder="Write something about yourself"
+                    ></textarea>
+    
+                    <label>Profile Image Upload:</label>
+                    <input 
+                        type="file" 
+                        accept="image/*" 
+                        onChange={(e) => setProfilePicture(e.target.files[0])} 
+                    />
+    
+                    <div className="button-group">
+                        <button onClick={handleSave} className="save-btn">Save</button>
+                        <button onClick={() => navigate("/home/profile")} className="cancel-btn">Go Back</button>
+                    </div>
                 </div>
             </div>
         </div>
