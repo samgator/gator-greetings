@@ -1,5 +1,6 @@
 import express from 'express';
 import Message from '../models/Message.js';
+import Notification from '../models/Notification.js';
 import upload from "../config/storage.js";
 import { gfs, gridfsBucket } from "../config/gridfsConfig.js";
 
@@ -90,7 +91,7 @@ router.get("/image/:filename", async (req, res) => {
     }
 });
 
-// Post messages
+// Post reply
 router.post('/:id/replies', async (req, res) => {
     const { id } = req.params;
     const { replyContent, authorId } = req.body;
@@ -109,6 +110,20 @@ router.post('/:id/replies', async (req, res) => {
 
         message.replies.push(reply);
         await message.save();
+
+        // Create a notification (unless user replies to themselves)
+        if (authorId !== message.author.toString()) {
+            const senderProfile = await Profile.findById(authorId);
+            const senderName = senderProfile?.username || 'Someone';
+
+            await Notification.create({
+                content: `${senderName} replied to your message.`,
+                recipient: message.author,
+                sender: authorId,
+                context: message._id,
+            });
+            
+        }
 
         res.status(201).json(reply);
     } catch (error) {
@@ -154,6 +169,20 @@ router.post('/:id/likes', async (req, res) => {
             // Like
             message.likes += 1;
             message.likedBy.push(userId);
+
+            // Create a notification (unless user likes their own post)
+            if (userId !== message.author.toString()) {
+                const senderProfile = await Profile.findById(userId);
+                const senderName = senderProfile?.username || 'Someone';
+
+                await Notification.create({
+                    content: `${senderName} liked your message.`,
+                    recipient: message.author,
+                    sender: userId,
+                    context: message._id,
+                });
+                
+            }
         }
 
         await message.save();
