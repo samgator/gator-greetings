@@ -1,5 +1,5 @@
 import express from "express";
-import Notification from "../models/Notification";
+import Notification from "../models/Notification.js";
 
 const router = express.Router();
 
@@ -46,3 +46,5 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: 'Error deleting notification', error: err.message });
     }
 });
+
+export default router;
