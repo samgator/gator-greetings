@@ -66,9 +66,35 @@
 
 .profile-edit-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    min-height: 100vh;
     padding: 20px;
+}
+
+.edit-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    width: 35%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-card h1 {
+    color: #0021A5;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.edit-form label {
+    color: #0021A5;
+    font-weight: bold;
 }
 
 .edit-form {
@@ -86,13 +112,31 @@
     width: 100%;
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 2px solid #0021A5;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edit-form input:focus, .edit-form textarea:focus {
+    outline: none;
+    border: 2px solid #FA4616;
+    box-shadow: 0 0 8px #FA4616;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edit-form input[type="text"], .edit-form textarea, .edit-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .button-group {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
     margin-top: 10px;
+    margin-left: 20px;
 }
 
 .save-btn, .cancel-btn {
@@ -103,13 +147,33 @@
 }
 
 .save-btn {
-    background-color: #4CAF50;
+    background-color: #FA4616;
     color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.save-btn:hover {
+    background-color: #c43d11;
 }
 
 .cancel-btn {
-    background-color: #f44336;
+    background-color: #0021A5;
     color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #001b87;
 }
 
 
