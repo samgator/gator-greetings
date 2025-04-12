@@ -7,6 +7,7 @@ import records from "./routes/record.js";
 import authRoutes from "./routes/authRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -35,6 +36,7 @@ app.use("/record", records); // MongoDB example
 app.use("/auth", authRoutes); // Regular Authentication Routes
 app.use("/messages", messageRoutes); // Messaging routes
 app.use("/profile", profileRoutes); // Profile routes
+app.use("/notification", notificationRoutes); // Notification routes
 
 
 const PORT = process.env.PORT || 5050;
