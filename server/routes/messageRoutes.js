@@ -1,6 +1,7 @@
 import express from 'express';
 import Message from '../models/Message.js';
 import Notification from '../models/Notification.js';
+import Profile from '../models/Profile.js';
 import upload from "../config/storage.js";
 import { gfs, gridfsBucket } from "../config/gridfsConfig.js";
 
@@ -113,7 +114,8 @@ router.post('/:id/replies', async (req, res) => {
 
         // Create a notification (unless user replies to themselves)
         if (authorId !== message.author.toString()) {
-            const senderProfile = await Profile.findById(authorId);
+            
+            const senderProfile = await Profile.findOne({ userId: authorId });
             const senderName = senderProfile?.username || 'Someone';
 
             await Notification.create({
@@ -122,7 +124,7 @@ router.post('/:id/replies', async (req, res) => {
                 sender: authorId,
                 context: message._id,
             });
-            
+
         }
 
         res.status(201).json(reply);
@@ -172,7 +174,8 @@ router.post('/:id/likes', async (req, res) => {
 
             // Create a notification (unless user likes their own post)
             if (userId !== message.author.toString()) {
-                const senderProfile = await Profile.findById(userId);
+                
+                const senderProfile = await Profile.findOne({ userId });
                 const senderName = senderProfile?.username || 'Someone';
 
                 await Notification.create({
