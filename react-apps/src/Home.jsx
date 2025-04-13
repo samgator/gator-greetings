@@ -107,7 +107,8 @@ function Home() {
                     <p>Profile</p>
                 </button>
                 <button className="notifications-btn" onClick={navigateNotifications}>
-                    <p>Notifications</p>
+                    <img style={{ width: '3vw' }} src="/src/assets/notif_icon.png" />
+                    <p className='notifs-text'>Notifications</p>
                 </button>
             </div>
         </div>
