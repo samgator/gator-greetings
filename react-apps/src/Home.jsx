@@ -8,6 +8,7 @@ function Home() {
     const navigate = useNavigate();
     const [messages, setMessages] = useState([]);
     const [selectedTopic, setSelectedTopic] = useState('All Topics');
+    const [sortBy, setSortBy] = useState('Recent');
 
     // Fetch messages from the backend
     useEffect(() => {
@@ -51,6 +52,15 @@ function Home() {
         setIsOpen(false);
     }
 
+    const handleSortBy = () => {
+        if(sortBy == 'Recent'){
+            setSortBy('Likes');
+        }
+        else{
+            setSortBy('Recent');
+        }
+    }
+
     const topics = [ 'Choose A Topic','All Topics','Academics','Clubs','Extracurriculars','Housing','Meal Plan','Social Events','Sports','Other' ];
 
     const filteredMessages = selectedTopic === 'All Topics'? messages : messages.filter((msg) => msg.topic === selectedTopic);
@@ -80,6 +90,11 @@ function Home() {
                     )}
                     
                 </Dropdown>
+
+                <button className="sort-by-btn" onClick={handleSortBy}>
+                    <p>Sorted by</p>
+                    <p>{sortBy}</p>
+                </button>
             </div>
             <div className="center-content">
                 <div className="messages-list">
