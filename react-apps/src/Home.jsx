@@ -78,16 +78,6 @@ function Home() {
 
     return (
         <div className="home-container">
-            <div className="search-navbar">
-                <input
-                    type="text"
-                    className="search-input"
-                    placeholder="Search messages..."
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                />
-            </div>
-
             <div className="left-sidebar">
                 <button className="message-btn" onClick={navigateCreateMessage}>
                     <img
@@ -119,6 +109,15 @@ function Home() {
 
             </div>
             <div className="center-content">
+                <div className="search-navbar">
+                    <input
+                        type="text"
+                        className="search-input"
+                        placeholder="Search messages..."
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
+                </div>
                 <div className="messages-list">
                     {sortedMessages.map((msg) => (
                         <MessagePreview
@@ -133,6 +132,7 @@ function Home() {
                         />
                     ))}
                 </div>
+                
             </div>
             <div className="right-sidebar">
                 <button className="logout-btn" onClick={navigateLogin}>

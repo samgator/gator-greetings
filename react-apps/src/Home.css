@@ -219,18 +219,27 @@
 
 .search-navbar {
     width: 100%;
-    padding: 10px;
-    background-color: #f8f9fa;
+    padding: 1.2vw 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .search-input {
-    width: 80%;
-    padding: 8px 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 40vw;
+    max-width: 600px;
+    padding: 0.7vw 1.2vw;
+    border: 2px solid #0021A5;
+    border-radius: 2vw;
+    font-size: 1vw;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #fa4616;
+    box-shadow: 0 0 0 0.2vw rgba(250, 70, 22, 0.25);
 }
