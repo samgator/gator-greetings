@@ -8,6 +8,7 @@ import Message from './Message.jsx'
 import MessageCreate from './MessageCreate.jsx'
 import ProfileEdit from './ProfileEdit.jsx'
 import ProfileView from './ProfileView.jsx'
+import NotificationPage from './NotificationPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
               <Route path='profile' element={<Profile />} />
               <Route path='profile/edit' element={<ProfileEdit />} />
               <Route path="profileview/:id" element={<ProfileView />} />
+              <Route path='notifications' element={<NotificationPage />} />
           </Route>
       </Routes>
   </BrowserRouter>

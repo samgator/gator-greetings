@@ -1,0 +1,27 @@
+.notifications-container{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notification-container{
+    width: 60vw;
+    align-items: left;
+    background-color: aliceblue;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+    padding: 1vw;
+    margin: 1vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.notification{
+    font-size: 1vw;
+    font-style: bold;
+    width: 80%
+}
+.return-message{
+    width: 20%;
+    text-align: right;
+}

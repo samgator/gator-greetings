@@ -27,6 +27,10 @@ function Home() {
         navigate('profile');
     }
 
+    function navigateNotifications() {
+        navigate('notifications');
+    }
+
     function navigateCreateMessage() {
         navigate('message-create');
     }
@@ -101,6 +105,9 @@ function Home() {
                 <button className="profile-btn" onClick={navigateProfile}>
                     <img style={{ width: '4vw' }} src="/src/assets/profile_icon.png" />
                     <p>Profile</p>
+                </button>
+                <button className="notifications-btn" onClick={navigateNotifications}>
+                    <p>Notifications</p>
                 </button>
             </div>
         </div>
