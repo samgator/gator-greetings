@@ -77,6 +77,11 @@ function Home() {
                     <p className="message-btn-content">Message</p>
                 </button>
 
+                <button className="sort-by-btn" onClick={handleSortBy}>
+                    <p>Sorted by</p>
+                    <p>{sortBy}</p>
+                </button>
+
                 <Dropdown onToggle={handleToggle}>
                     <Dropdown.Toggle className="topics-dropdown">
                         {selectedTopic}
@@ -91,10 +96,6 @@ function Home() {
                     
                 </Dropdown>
 
-                <button className="sort-by-btn" onClick={handleSortBy}>
-                    <p>Sorted by</p>
-                    <p>{sortBy}</p>
-                </button>
             </div>
             <div className="center-content">
                 <div className="messages-list">
