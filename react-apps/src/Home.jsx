@@ -63,7 +63,13 @@ function Home() {
 
     const topics = [ 'Choose A Topic','All Topics','Academics','Clubs','Extracurriculars','Housing','Meal Plan','Social Events','Sports','Other' ];
 
-    const filteredMessages = selectedTopic === 'All Topics'? messages : messages.filter((msg) => msg.topic === selectedTopic);
+    const filteredMessages = selectedTopic === 'All Topics' 
+        ? messages 
+        : messages.filter((msg) => msg.topic === selectedTopic);
+
+    const sortedMessages = sortBy === 'Likes'
+        ? [...filteredMessages].sort((a, b) => b.likes - a.likes)
+        : filteredMessages;
 
     return (
         <div className="home-container">
@@ -99,7 +105,7 @@ function Home() {
             </div>
             <div className="center-content">
                 <div className="messages-list">
-                    {filteredMessages.map((msg) => (
+                    {sortedMessages.map((msg) => (
                         <MessagePreview
                             key={msg._id}
                             id={msg._id}
