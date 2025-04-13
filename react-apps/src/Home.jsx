@@ -9,6 +9,7 @@ function Home() {
     const [messages, setMessages] = useState([]);
     const [selectedTopic, setSelectedTopic] = useState('All Topics');
     const [sortBy, setSortBy] = useState('Recent');
+    const [searchQuery, setSearchQuery] = useState(''); // State for search query
 
     // Fetch messages from the backend
     useEffect(() => {
@@ -39,6 +40,10 @@ function Home() {
     function navigateLogin() {
         navigate('/');
     }
+
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
     {/*Dropdown menu useState*/}
     const [isOpen, setIsOpen] = useState(false);
@@ -73,6 +78,16 @@ function Home() {
 
     return (
         <div className="home-container">
+            <div className="search-navbar">
+                <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Search messages..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                />
+            </div>
+
             <div className="left-sidebar">
                 <button className="message-btn" onClick={navigateCreateMessage}>
                     <img
