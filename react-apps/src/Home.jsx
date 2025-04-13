@@ -27,6 +27,10 @@ function Home() {
         navigate('profile');
     }
 
+    function navigateNotifications() {
+        navigate('notifications');
+    }
+
     function navigateCreateMessage() {
         navigate('message-create');
     }
@@ -101,6 +105,10 @@ function Home() {
                 <button className="profile-btn" onClick={navigateProfile}>
                     <img style={{ width: '4vw' }} src="/src/assets/profile_icon.png" />
                     <p>Profile</p>
+                </button>
+                <button className="notifications-btn" onClick={navigateNotifications}>
+                    <img style={{ width: '3vw' }} src="/src/assets/notif_icon.png" />
+                    <p className='notifs-text'>Notifications</p>
                 </button>
             </div>
         </div>
