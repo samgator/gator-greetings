@@ -107,7 +107,7 @@ function Message() {
     : "/src/assets/logo.png";
 
     const exitMessage = () => {
-        navigate('/home');
+        navigate(-1);
     };
 
     if (!message) {
@@ -182,7 +182,7 @@ function Message() {
     return ( 
         <div className='container'>
             <div className='exit-message-btn-container'>
-                <button className='exit-message-btn' onClick={exitMessage}>Back to Home</button>
+                <button className='exit-message-btn' onClick={exitMessage}>Back</button>
             </div>
 
             <div className='message-container'>
