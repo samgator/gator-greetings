@@ -31,10 +31,8 @@ function NotificationPage() {
         <div className='notifications-container'>
             <button className='exit-notifications-btn' onClick={navigateHome}>Back to Home</button>
             {notifications.map((noti) => (
-                <Notification notification={noti.content} source={noti.context.toString()}/>
+                <Notification notification={noti.content} source={noti.context.toString()} id={noti._id}/>
             ))}
-            <Notification notification={"Someone has replied to your message!"} source={"RemoveThis"/*Enter message source here*/}/>
-            <Notification notification={"Someone has liked your message!"} source={"RemoveThis"/*Enter message source here*/}/>
         </div>
     );
 };
