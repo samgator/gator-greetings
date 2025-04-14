@@ -41,8 +41,30 @@ function Home() {
         navigate('/');
     }
 
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
+    const handleSearchChange = async (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+    
+        if (query.trim() === '') {
+            // Reset to all messages if search query is empty
+            const response = await fetch('http://localhost:5050/messages/fetch');
+            const data = await response.json();
+            setMessages(data.reverse());
+            return;
+        }
+    
+        try {
+            const response = await fetch(`http://localhost:5050/messages/fetch-by-username/${query}`);
+            if (response.ok) {
+                const data = await response.json();
+                setMessages(data.reverse());
+            } else {
+                console.error('No messages found for this username');
+                setMessages([]); // Clear messages if no results
+            }
+        } catch (error) {
+            console.error('Error fetching messages by username:', error);
+        }
     };
 
     {/*Dropdown menu useState*/}
