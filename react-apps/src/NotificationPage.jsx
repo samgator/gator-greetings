@@ -30,9 +30,11 @@ function NotificationPage() {
     return ( 
         <div className='notifications-container'>
             <button className='exit-notifications-btn' onClick={navigateHome}>Back to Home</button>
-            {notifications.map((noti) => (
-                <Notification notification={noti.content} source={noti.context.toString()} id={noti._id}/>
-            ))}
+            {notifications.length === 0 ? (<p>You have no new notifications.</p>) : (
+                notifications.map((noti) => (
+                    <Notification key={noti._id} notification={noti.content} source={noti.context.toString()} id={noti._id}/>
+                ))
+            )}
         </div>
     );
 };
