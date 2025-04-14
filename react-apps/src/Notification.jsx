@@ -6,7 +6,11 @@ function Notification({notification, source}) {
 
     function navigateSource(){
         //function to navigate to notification's source message
-        navigate(`message/${source}`, { relative: 'path' });
+        navigate(`../message/${source}`);
+    }
+
+    function handleDeletedNotification() {
+        const response = await
     }
 
     return ( 

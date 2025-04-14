@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 // get all notifications for a recipient
 router.get('/:recipientId', async (req, res) => {
     try {
-        const notifications = await Notification.find({ recipient: req.params.recipientId.sort({ createdAt: -1 })});
+        const notifications = await Notification.find({ recipient: req.params.recipientId });
         res.status(200).json(notifications);
     } catch (err) {
         res.status(500).json({ message: 'Error fetching notifications', error: err.message })
