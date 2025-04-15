@@ -37,8 +37,11 @@ function Home() {
         navigate('message-create');
     }
 
-    function navigateLogin() {
-        navigate('/');
+    function handleLogout() {
+        localStorage.clear();
+        sessionStorage.clear();
+        navigate("/", { replace: true });
+        window.location.reload(true);
     }
 
     const handleSearchChange = (e) => {
@@ -135,7 +138,7 @@ function Home() {
                 
             </div>
             <div className="right-sidebar">
-                <button className="logout-btn" onClick={navigateLogin}>
+                <button className="logout-btn" onClick={handleLogout}>
                     <img style={{ width: '3.5vw' }} src="/src/assets/logout_icon.png" />
                     <p className="message-btn-content">Logout</p>
                 </button>
