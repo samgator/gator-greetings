@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Notification from './Notification.jsx';
 import './NotificationPage.css';
@@ -8,6 +8,7 @@ const userId = localStorage.getItem('userId');
 function NotificationPage() {
     const [notifications, setNotifications] = useState([]);
     const navigate = useNavigate();
+    const location = useLocation();
 
     function navigateHome(){
         navigate(-1);
@@ -24,7 +25,7 @@ function NotificationPage() {
         }
     }
     fetchNotifications();
-    }, []);
+    }, [location.pathname]);
     
 
     return ( 

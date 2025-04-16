@@ -52,4 +52,13 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Logout route
+router.post("/logout", (req, res) => {
+  try {
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error during logout", error });
+  }
+});
+
 export default router;

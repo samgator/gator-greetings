@@ -38,11 +38,16 @@ function Home() {
         navigate('message-create');
     }
 
-    function handleLogout() {
+    async function handleLogout() {
+        try {
+            await fetch('http://localhost:5050/logout', { method: 'POST', credentials: 'include' });
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+        // Clear cache
         localStorage.clear();
         sessionStorage.clear();
         navigate("/", { replace: true });
-        window.location.reload(true);
     }
 
     const handleSearchChange = async (e) => {
