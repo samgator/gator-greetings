@@ -225,6 +225,7 @@ router.get('/search/:query', async (req, res) => {
             searchConditions.push({ author: profile.userId });
         }
 
+        // populate
         const messages = await Message.find({ $or: searchConditions })
             .populate('author', 'username')
             .sort({ createdAt: -1 });
