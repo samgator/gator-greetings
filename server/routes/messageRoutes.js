@@ -197,34 +197,42 @@ router.post('/:id/likes', async (req, res) => {
     }
 });
 
-// fetch by username
-router.get('/fetch-by-username/:username', async (req, res) => {
-    try {
-        const { username } = req.params;
 
-        // Validate username
-        if (!username || username.trim() === "") {
-            return res.status(400).json({ message: 'Username is required' });
+router.get('/search/:query', async (req, res) => {
+    try {
+        const { query } = req.params;
+
+        if (!query || query.trim() === "") {
+            const messages = await Message.find()
+                .populate('author', 'username')
+                .sort({ createdAt: -1 });
+            return res.json(messages);
         }
 
-        // Find the user by username (case-insensitive)
+        // Search by username through Profile
         const profile = await Profile.findOne({ 
-            username: { $regex: new RegExp(username, 'i') }
+            username: { $regex: new RegExp(query, 'i') }
         });
 
-        if (!profile) {
-            return res.status(404).json({ message: 'User not found' });
+        // Create OR conditions for search
+        const searchConditions = [
+            { title: { $regex: new RegExp(query, 'i') } },
+            { topic: { $regex: new RegExp(query, 'i') } }
+        ];
+
+        // Add author condition if profile found
+        if (profile) {
+            searchConditions.push({ author: profile.userId });
         }
 
-        // Find messages authored by the user
-        const messages = await Message.find({ author: profile.userId })
+        const messages = await Message.find({ $or: searchConditions })
             .populate('author', 'username')
             .sort({ createdAt: -1 });
 
-        console.log('Found messages:', messages);
         res.json(messages);
     } catch (error) {
-        console.error('Error fetching messages by username:', error);
+        console.error('Error searching messages:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+

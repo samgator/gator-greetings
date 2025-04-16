@@ -62,7 +62,7 @@ function Home() {
                         setMessages(data.reverse());
                         return;
                     } else {
-                        response = await fetch(`http://localhost:5050/messages/fetch-by-username/${query}`);
+                        response = await fetch(`http://localhost:5050/messages/search/${query}`);
                     }
 
                     if (response.ok) {
