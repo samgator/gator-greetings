@@ -2,6 +2,7 @@ import express from 'express';
 import Message from '../models/Message.js';
 import Notification from '../models/Notification.js';
 import Profile from '../models/Profile.js';
+import User from '../models/User.js';
 import upload from "../config/storage.js";
 import { gfs, gridfsBucket } from "../config/gridfsConfig.js";
 
@@ -193,5 +194,37 @@ router.post('/:id/likes', async (req, res) => {
     } catch (error) {
         console.error('Error updating like:', error);
         res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// fetch by username
+router.get('/fetch-by-username/:username', async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        // Validate username
+        if (!username || username.trim() === "") {
+            return res.status(400).json({ message: 'Username is required' });
+        }
+
+        // Find the user by username (case-insensitive)
+        const profile = await Profile.findOne({ 
+            username: { $regex: new RegExp(username, 'i') }
+        });
+
+        if (!profile) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Find messages authored by the user
+        const messages = await Message.find({ author: profile.userId })
+            .populate('author', 'username')
+            .sort({ createdAt: -1 });
+
+        console.log('Found messages:', messages);
+        res.json(messages);
+    } catch (error) {
+        console.error('Error fetching messages by username:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
