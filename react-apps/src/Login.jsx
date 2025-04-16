@@ -96,6 +96,8 @@ function Login() {
             localStorage.setItem("token", data.token);
             localStorage.setItem("userId", data._id);
             navigate('home');
+            // Reload page for logout functionality
+            window.location.reload();
         } else {
             setMessage(data.message || "Login Failed.");
         }

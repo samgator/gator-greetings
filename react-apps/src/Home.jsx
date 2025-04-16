@@ -42,10 +42,10 @@ function Home() {
         } catch (error) {
             console.error('Error logging out:', error);
         }
+        // Clear cache
         localStorage.clear();
         sessionStorage.clear();
         navigate("/", { replace: true });
-        window.location.reload(true);
     }
 
     {/*Dropdown menu useState*/}
