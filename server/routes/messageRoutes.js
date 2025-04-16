@@ -2,6 +2,7 @@ import express from 'express';
 import Message from '../models/Message.js';
 import Notification from '../models/Notification.js';
 import Profile from '../models/Profile.js';
+import User from '../models/User.js';
 import upload from "../config/storage.js";
 import { gfs, gridfsBucket } from "../config/gridfsConfig.js";
 
@@ -195,3 +196,44 @@ router.post('/:id/likes', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+
+router.get('/search/:query', async (req, res) => {
+    try {
+        const { query } = req.params;
+
+        if (!query || query.trim() === "") {
+            const messages = await Message.find()
+                .populate('author', 'username')
+                .sort({ createdAt: -1 });
+            return res.json(messages);
+        }
+
+        // Search by username through Profile
+        const profile = await Profile.findOne({ 
+            username: { $regex: new RegExp(query, 'i') }
+        });
+
+        // Create OR conditions for search
+        const searchConditions = [
+            { title: { $regex: new RegExp(query, 'i') } },
+            { topic: { $regex: new RegExp(query, 'i') } }
+        ];
+
+        // Add author condition if profile found
+        if (profile) {
+            searchConditions.push({ author: profile.userId });
+        }
+
+        // populate
+        const messages = await Message.find({ $or: searchConditions })
+            .populate('author', 'username')
+            .sort({ createdAt: -1 });
+
+        res.json(messages);
+    } catch (error) {
+        console.error('Error searching messages:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+

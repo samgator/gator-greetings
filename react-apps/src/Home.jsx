@@ -10,6 +10,7 @@ function Home() {
     const [selectedTopic, setSelectedTopic] = useState('All Topics');
     const [sortBy, setSortBy] = useState('Recent');
     const [searchQuery, setSearchQuery] = useState(''); // State for search query
+    const [searchTimeout, setSearchTimeout] = useState(null);
 
     // Fetch messages from the backend
     useEffect(() => {
@@ -44,8 +45,42 @@ function Home() {
         window.location.reload(true);
     }
 
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
+    const handleSearchChange = async (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+
+        // Clear existing timeout
+        if (searchTimeout) {
+            clearTimeout(searchTimeout);
+        }
+
+        // Set new timeout
+        setSearchTimeout(
+            setTimeout(async () => {
+                try {
+                    let response;
+                    if (query.trim() === '') {
+                        const response = await fetch('http://localhost:5050/messages/fetch');
+                        const data = await response.json();
+                        setMessages(data.reverse());
+                        return;
+                    } else {
+                        response = await fetch(`http://localhost:5050/messages/search/${query}`);
+                    }
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        setMessages(data);
+                    } else {
+                        if (response.status === 404) {
+                            setMessages([]);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error fetching messages:', error);
+                }
+            }, 100) // 100ms delay
+        );
     };
 
     {/*Dropdown menu useState*/}
