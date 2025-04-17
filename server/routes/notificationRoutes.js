@@ -47,4 +47,20 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// Check if user has a notification
+router.get('/has/:recipientId', async(req, res) => {
+    const recipientId = req.params.recipientId;
+
+    if(!mongoose.Types.ObjectId.isValid(recipientId)) {
+        return res.status(400).json({ error: 'Invalid Recipient ID'});
+    }
+
+    try {
+        const hasNotifications = await Notification.exists({ recipient: recipientId });
+        res.json({ hasNotifications: !!hasNotifications });
+    } catch (err) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 export default router;
