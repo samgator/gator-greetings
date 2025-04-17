@@ -11,6 +11,7 @@ function Home() {
     const [sortBy, setSortBy] = useState('Recent');
     const [searchQuery, setSearchQuery] = useState(''); // State for search query
     const [searchTimeout, setSearchTimeout] = useState(null);
+    const [hasNotif, setHasNotif] = useState(true);
 
     // Fetch messages from the backend
     useEffect(() => {
@@ -189,6 +190,7 @@ function Home() {
                 <button className="notifications-btn" onClick={navigateNotifications}>
                     <img style={{ width: '3vw' }} src="/src/assets/notif_icon.png" />
                     <p className='notifs-text'>Notifications</p>
+                    <div className="red-circle" hidden={!hasNotif}/>
                 </button>
             </div>
         </div>
