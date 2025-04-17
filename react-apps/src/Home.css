@@ -130,7 +130,7 @@
     border-radius: 100%;
     margin-top: -3.75vw;
     margin-left: -3.75vw;
-    position: fixed;
+    position: absolute;
 }
 
 .messages-list {
