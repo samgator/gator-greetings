@@ -5,13 +5,14 @@ import MessagePreview from './MessagePreview.jsx';
 import './Home.css';
 
 function Home() {
+    const userId = localStorage.getItem('userId');
     const navigate = useNavigate();
     const [messages, setMessages] = useState([]);
     const [selectedTopic, setSelectedTopic] = useState('All Topics');
     const [sortBy, setSortBy] = useState('Recent');
     const [searchQuery, setSearchQuery] = useState(''); // State for search query
     const [searchTimeout, setSearchTimeout] = useState(null);
-    const [hasNotif, setHasNotif] = useState(true);
+    const [hasNotif, setHasNotif] = useState(false);
 
     // Fetch messages from the backend
     useEffect(() => {
@@ -24,8 +25,19 @@ function Home() {
                 console.error('Error fetching messages:', error);
             }
         }
+
+        const checkNotifications = async () => {
+            try {
+                const response = await fetch(`http://localhost:5050/notification/has/${userId}`);
+                const data = await response.json();
+                setHasNotif(data.hasNotifications);
+            } catch (error) {
+                console.error('Error checking for notifications:', error)
+            }
+        };
+        checkNotifications();
         fetchMessages();
-    }, []);
+    }, [userId]);
 
     function navigateProfile() {
         navigate('profile');

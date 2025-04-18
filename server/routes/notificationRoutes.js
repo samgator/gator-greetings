@@ -1,5 +1,6 @@
 import express from "express";
 import Notification from "../models/Notification.js";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -57,7 +58,12 @@ router.get('/has/:recipientId', async(req, res) => {
 
     try {
         const hasNotifications = await Notification.exists({ recipient: recipientId });
-        res.json({ hasNotifications: !!hasNotifications });
+
+        if(hasNotifications) {
+            res.json({ hasNotifications: true });
+        } else {
+            res.json({ hasNotifications: false });
+        }
     } catch (err) {
         res.status(500).json({ error: 'Server error' });
     }
