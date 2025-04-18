@@ -1,5 +1,6 @@
 import express from "express";
 import Notification from "../models/Notification.js";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -44,6 +45,27 @@ router.delete('/:id', async (req, res) => {
         res.status(200).json({ message: 'Notification deleted successfully '});
     } catch (err) {
         res.status(500).json({ message: 'Error deleting notification', error: err.message });
+    }
+});
+
+// Check if user has a notification
+router.get('/has/:recipientId', async(req, res) => {
+    const recipientId = req.params.recipientId;
+
+    if(!mongoose.Types.ObjectId.isValid(recipientId)) {
+        return res.status(400).json({ error: 'Invalid Recipient ID'});
+    }
+
+    try {
+        const hasNotifications = await Notification.exists({ recipient: recipientId });
+
+        if(hasNotifications) {
+            res.json({ hasNotifications: true });
+        } else {
+            res.json({ hasNotifications: false });
+        }
+    } catch (err) {
+        res.status(500).json({ error: 'Server error' });
     }
 });
 
