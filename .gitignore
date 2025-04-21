@@ -5,3 +5,4 @@ package.json
 
 server/package-lock.json
 server/package.json
+config.env
