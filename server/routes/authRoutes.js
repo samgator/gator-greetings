@@ -1,13 +1,11 @@
 import express from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET;
 
 // Register route
 router.post("/register", async (req, res) => {
@@ -44,9 +42,8 @@ router.post("/login", async (req, res) => {
         return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1h" });
 
-    res.json({ message: "Login successful", token, _id: user._id, });
+    res.json({ message: "Login successful", _id: user._id, });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
